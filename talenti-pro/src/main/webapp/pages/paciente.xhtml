@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<ui:composition xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-sistema.xhtml">
+
+
+
+<ui:define name="content">
+<h:form id="formBuscaPaciente">
+
+	    <p:panel header="Buscar Paciente" style="max-width:600px;margin:auto;">
+	        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
+	            <p:outputLabel for="cpfBusca" value="CPF:" />
+	            <p:inputMask mask="999.999.999-99" id="cpfBusca" value="#{pacienteBean.filtroCpf}"
+	                         
+	                         placeholder="Digite o CPF" style="width:100%" />
+	
+	            <p:outputLabel for="nomeBusca" value="Nome:" />
+	            <p:inputText id="nomeBusca" value="#{pacienteBean.filtroNome}"
+	                         placeholder="Digite o nome do paciente" style="width:100%" />
+	        </h:panelGrid>
+	
+	        <p:commandButton value="Pesquisar" icon="pi pi-search"
+	                         action="#{pacienteBean.pesquisar}"
+	                         process="@form"
+	                         update="formPaciente:tabela msgs"
+	                         style="margin-top:10px;width:100%;" />
+	    </p:panel>
+	
+	</h:form>
+
+	<p:separator style="margin:40px 0" />
+
+	       <h:form id="formPaciente">
+				<p:panel header="Cadastro de Paciente"
+					style="max-width:600px;margin:auto;">
+
+				<h:inputHidden id="id" value="#{pacienteBean.paciente.id}" />
+ 				<h:panelGrid columns="2" style="width:100%" cellpadding="5">
+					
+					 <p:outputLabel  value="ID:" />
+					<p:inputText value="#{pacienteBean.paciente.id}" style="width:100%"
+						readonly="true" />
+						
+					<p:outputLabel value="Nome:" />	
+					<p:inputText value="#{pacienteBean.paciente.nome}"
+						placeholder="Nome" style="width:100%" 
+						required="true" />
+						
+					<p:outputLabel value="Cpf:" />	
+					<p:inputMask value="#{pacienteBean.paciente.cpf}"
+						required="true"
+						mask="999.999.999-99" placeholder="CPF" style="width:100%" />
+
+				</h:panelGrid>	
+				<h:panelGroup layout="block" style="display:flex; gap:10px; margin-top:10px;">
+				    <p:commandButton value="Salvar" 
+				                     action="#{pacienteBean.salvar}"
+				                     update="formPaciente tabela msgs"
+				                     icon="pi pi-save"
+				                     style="flex:1;" />
+				
+				    <p:commandButton value="Novo" 
+				                     action="#{pacienteBean.novo}"
+				                     update="formPaciente tabela msgs"
+				                     icon="pi pi-plus"
+				                     style="flex:1;" />
+				</h:panelGroup>
+					
+				</p:panel>
+
+				<p:separator style="margin:20px 0" />
+				
+
+				<p:dataTable id="tabela" value="#{pacienteBean.pacientes}" 
+				    var="p"
+				    paginator="true"
+				    lazy="true"
+				    rows="5"
+				    rowsPerPageTemplate="5,10,20,50"
+				    paginatorAlwaysVisible="true"
+				    paginatorPosition="top"
+					style="max-width:600px;margin:auto;">
+					<p:column headerText="ID">#{p.id}</p:column>
+					<p:column headerText="Nome">#{p.nome}</p:column>
+					<p:column headerText="CPF">#{p.cpf}</p:column>
+					<p:column headerText="Ações">
+					<p:commandButton icon="pi pi-pencil"
+					    action="#{pacienteBean.editar(p)}"
+					    update=":formPaciente"
+					    process="@this"
+					    immediate="true"
+					    styleClass="ui-button-warning"
+					    title="Editar" />
+					
+					<p:commandButton icon="pi pi-trash"
+					    action="#{pacienteBean.excluir(p)}"
+					    update="tabela :formPaciente msgs"
+					    process="@this"
+					    immediate="true"
+					    styleClass="ui-button-danger"
+					    title="Excluir" />
+
+					</p:column>
+				</p:dataTable>
+          <p:separator style="margin:50px 0" />					
+			</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<ui:composition 
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-sistema.xhtml">
+	
+	<ui:define name="header">
+	  <h:form>
+        <p:menubar style="background:#1976d2;color:white;border:none;">
+
+            <!-- Menu dropdown -->
+            <p:submenu label="Cadastro" icon="pi pi-capsules">
+                <p:menuitem value="Paciente" icon="pi pi-plus"   />
+                <p:menuitem value="Listar" icon="pi pi-list" />
+            </p:submenu>
+
+            <!-- Outro submenu -->
+            <p:submenu label="Relatórios" icon="pi pi-chart-line">
+                <p:menuitem value="Mensal" icon="pi pi-calendar" />
+                <p:menuitem value="Anual" icon="pi pi-chart-bar" />
+            </p:submenu>
+
+        </p:menubar>
+    </h:form>
+	</ui:define>
+
+	<ui:define name="content">
+	</ui:define>
+</ui:composition>

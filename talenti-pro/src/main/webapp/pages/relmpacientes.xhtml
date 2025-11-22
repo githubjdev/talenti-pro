@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<ui:composition xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-sistema.xhtml">
+
+
+
+<ui:define name="content">
+	       <h:form id="formaMedicamento">
+	         <p:panel header="Os 2 pacientes com mais medicamentos prescritos" style="max-width:600px;margin:auto;">
+				<p:dataTable value="#{relatorioPacienteManagedBean.pacientes}" 
+				    var="p"
+					style="max-width:600px;margin:auto;">
+					<p:column headerText="Nome">#{p.nomePaciente}</p:column>
+					<p:column headerText="Total">#{p.totalMedicamentos}</p:column>
+				</p:dataTable>
+				</p:panel>
+
+				<p:separator style="margin:40px 0" />				
+				
+				<p:panel header="Pacientes com total de medicamentos" style="max-width:600px;margin:auto;">
+				<p:dataTable value="#{relatorioPacienteManagedBean.pacientesFull}" 
+				    var="p"
+					style="max-width:600px;margin:auto;">
+					<p:column headerText="Nome">#{p.nome}</p:column>
+					<p:column headerText="Total">#{p.totalPrescricoes}</p:column>
+				</p:dataTable>
+				</p:panel>
+			</h:form>
+			<p:separator style="margin:60px 0" />	
+	</ui:define>
+</ui:composition>

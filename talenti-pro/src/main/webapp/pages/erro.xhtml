@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<ui:composition xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-sistema.xhtml">
+
+
+
+	<ui:define name="content">
+		<div class="error-container">
+			<i class="pi pi-exclamation-triangle error-icon"></i>
+			<h1 style="color: red;">Ocorreu um erro inesperado</h1>
+			<p style="color: red;">Pedimos desculpas pelo inconveniente. Caso
+				o problema persista, entre em contato com o suporte técnico.</p>
+
+			<h:form>
+				<p:commandButton value="Voltar para a página inicial"
+					icon="pi pi-home"
+					styleClass="p-button-rounded p-button-secondary back-button"
+					action="/pages/index.xhtml?faces-redirect=true" />
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

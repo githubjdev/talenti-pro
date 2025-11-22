@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cadastro de Medicamento</title>
+
+	<h:outputStylesheet library="webjars"
+		name="font-awesome/5.12.0/css/all.min-jsf.css" />
+	<h:outputStylesheet library="webjars"
+		name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+	<h:outputStylesheet library="css" name="cadastro.css" />
+</h:head>
+
+<h:body>
+	<div class="container">
+		<div class="header">
+			<p:menubar style="background:#1976d2;color:white;border:none;">
+
+				<!-- Menu dropdown -->
+				<p:submenu label="Cadastro" icon="pi pi-capsules">
+
+					<p:menuitem value="Medicamento" outcome="/pages/medicamento.xhtml"
+						icon="pi pi-plus" />
+
+					<p:menuitem value="Paciente" outcome="/pages/paciente.xhtml"
+						icon="pi pi-plus" />
+
+					<p:menuitem value="Receituário" outcome="/pages/receituario.xhtml"
+						icon="pi pi-plus" />
+				</p:submenu>
+
+				<p:submenu label="Consultar Receita" icon="pi pi-capsules">
+
+					<p:menuitem value="Medicamento"
+						outcome="/pages/recmedicamento.xhtml" icon="pi pi-plus" />
+
+					<p:menuitem value="Paciente" outcome="/pages/recpaciente.xhtml"
+						icon="pi pi-plus" />
+
+				</p:submenu>
+
+				<!-- Outro submenu -->
+				<p:submenu label="Relatórios" icon="pi pi-chart-line">
+					<p:menuitem value="Medicamento" icon="pi pi-chart-bar"
+						outcome="/pages/relmedicamento.xhtml" />
+					<p:menuitem value="Paciente" icon="pi pi-chart-bar"
+						outcome="/pages/relmpacientes.xhtml" />
+				</p:submenu>
+
+			</p:menubar>
+		</div>
+
+		<div class="content">
+			<p:growl id="msgs" showDetail="true" autoUpdate="true" />
+			<ui:insert name="content" />
+		</div>
+
+	</div>
+</h:body>
+</html>
