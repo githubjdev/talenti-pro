@@ -11,7 +11,7 @@ import jakarta.transaction.Transactional;
 @SuppressWarnings("unchecked")
 public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
 
-    @PersistenceContext(unitName = "medicamentoPU")
+    @PersistenceContext(unitName = "talenti-pro-pu")
     protected EntityManager em;
 
     private final Class<T> clazz;

@@ -25,7 +25,7 @@ public class DatabaseInitFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		try {
-			emf = Persistence.createEntityManagerFactory("medicamentoPU");
+			emf = Persistence.createEntityManagerFactory("talenti-pro-pu");
 			EntityManager em = emf.createEntityManager();
 			em.createNativeQuery("SELECT 1").getSingleResult();
 			em.close();

@@ -15,7 +15,7 @@ public class JPAProducer {
 	private final EntityManagerFactory emf;
 
 	public JPAProducer() {
-		emf = Persistence.createEntityManagerFactory("medicamentoPU");
+		emf = Persistence.createEntityManagerFactory("talenti-pro-pu");
 	}
 
 	@Produces
