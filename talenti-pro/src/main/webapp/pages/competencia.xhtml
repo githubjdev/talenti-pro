@@ -6,20 +6,20 @@
 
 
 <ui:define name="content">
-<h:form id="formBuscaMedicamento">
+<h:form id="formBuscaCompetencia">
 
-	    <p:panel header="Buscar Medicamento" style="max-width:600px;margin:auto;">
+	    <p:panel header="Buscar Competencia" style="max-width:600px;margin:auto;">
 	        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
 	
 	            <p:outputLabel for="nomeBusca" value="Nome:" />
-	            <p:inputText id="nomeBusca" value="#{medicamentoBean.filtroNome}"
-	                         placeholder="Digite o nome do medicamen to" style="width:100%" />
+	            <p:inputText id="nomeBusca" value="#{competenciaController.filtroNome}"
+	                         placeholder="Digite o nome da competência" style="width:100%" />
 	        </h:panelGrid>
 	
 	        <p:commandButton value="Pesquisar" icon="pi pi-search"
-	                         action="#{medicamentoBean.pesquisar}"
+	                         action="#{competenciaController.pesquisar}"
 	                         process="@form"
-	                         update="formMedicamento:tabela msgs"
+	                         update="formCompetencia:tabela msgs"
 	                         style="margin-top:10px;width:100%;" />
 	    </p:panel>
 	
@@ -27,19 +27,19 @@
 
 	<p:separator style="margin:40px 0" />
 
-	       <h:form id="formMedicamento">
-				<p:panel header="Cadastro de Medicamento"
+	       <h:form id="formCompetencia">
+				<p:panel header="Cadastro de Competencia"
 					style="max-width:600px;margin:auto;">
 
-				<h:inputHidden id="id" value="#{medicamentoBean.medicamento.id}" />
+				<h:inputHidden id="id" value="#{competenciaController.competencia.id}" />
  				<h:panelGrid columns="2" style="width:100%" cellpadding="5">
 					
 					 <p:outputLabel  value="ID:" />
-					<p:inputText value="#{medicamentoBean.medicamento.id}" style="width:100%"
+					<p:inputText value="#{competenciaController.competencia.id}" style="width:100%"
 						readonly="true" />
 						
 					<p:outputLabel value="Nome:" />	
-					<p:inputText value="#{medicamentoBean.medicamento.nome}"
+					<p:inputText value="#{competenciaController.competencia.nome}"
 						placeholder="Nome" style="width:100%" 
 						required="true" />
 						
@@ -47,14 +47,14 @@
 				</h:panelGrid>	
 				<h:panelGroup layout="block" style="display:flex; gap:10px; margin-top:10px;">
 				    <p:commandButton value="Salvar" 
-				                     action="#{medicamentoBean.salvar}"
-				                     update="formMedicamento tabela msgs"
+				                     action="#{competenciaController.salvar}"
+				                     update="formCompetencia tabela msgs"
 				                     icon="pi pi-save"
 				                     style="flex:1;" />
 				
 				    <p:commandButton value="Novo" 
-				                     action="#{medicamentoBean.novo}"
-				                     update="formMedicamento tabela msgs"
+				                     action="#{competenciaController.novo}"
+				                     update="formCompetencia tabela msgs"
 				                     icon="pi pi-plus"
 				                     style="flex:1;" />
 				</h:panelGroup>
@@ -64,7 +64,7 @@
 				<p:separator style="margin:20px 0" />
 				
 
-				<p:dataTable id="tabela" value="#{medicamentoBean.medicamentos}" 
+				<p:dataTable id="tabela" value="#{competenciaController.competencias}" 
 				    var="p"
 				    paginator="true"
 				    lazy="true"
@@ -77,16 +77,16 @@
 					<p:column headerText="Nome">#{p.nome}</p:column>
 					<p:column headerText="Ações">
 					<p:commandButton icon="pi pi-pencil"
-					    action="#{medicamentoBean.editar(p)}"
-					    update=":formMedicamento"
+					    action="#{competenciaController.editar(p)}"
+					    update=":formCompetencia"
 					    process="@this"
 					    immediate="true"
 					    styleClass="ui-button-warning"
 					    title="Editar" />
 					
 					<p:commandButton icon="pi pi-trash"
-					    action="#{medicamentoBean.excluir(p)}"
-					    update="tabela :formMedicamento msgs"
+					    action="#{competenciaController.excluir(p)}"
+					    update="tabela :formCompetencia msgs"
 					    process="@this"
 					    immediate="true"
 					    styleClass="ui-button-danger"

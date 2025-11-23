@@ -14,7 +14,7 @@ import jakarta.transaction.Transactional;
 @SuppressWarnings("unchecked")
 public abstract class GenericRepositoryImpl<T extends Serializable> implements GenericRepository<T> {
 
-    @PersistenceContext(unitName = "talenti-pro-pu")
+    @PersistenceContext
     protected EntityManager em;
 
     private final Class<T> clazz;

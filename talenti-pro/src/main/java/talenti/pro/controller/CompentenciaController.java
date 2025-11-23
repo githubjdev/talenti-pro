@@ -12,71 +12,67 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import talenti.pro.model.Medicamento;
+import talenti.pro.model.Competencia;
 import talenti.pro.repository.GenericLazyDataModel;
-import talenti.pro.repository.MedicamentoRepository;
+import talenti.pro.service.CompetenciaService;
 
-@Named(value = "medicamentoBean")
+@Named(value = "competenciaController")
 @ViewScoped
-public class MedicamentoBean implements Serializable {
+public class CompentenciaController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private MedicamentoRepository repo;
-
-	private Medicamento medicamento = new Medicamento();
-
-	private LazyDataModel<Medicamento> medicamentos;
-	private GenericLazyDataModel<Medicamento> gdm;
+	private CompetenciaService competenciaService;
+	private Competencia competencia = new Competencia();
+	private GenericLazyDataModel<Competencia> competencias;
 	private String filtroNome;
 
 	@PostConstruct
 	public void init() {
-		gdm = new GenericLazyDataModel<Medicamento>(repo);
-		medicamentos = gdm;
+		competencias = new GenericLazyDataModel<Competencia>(competenciaService.getRepository());
 	}
 
 	public void salvar() {
-		repo.salvar(medicamento);
-		medicamento = new Medicamento();
+		competenciaService.salvar(competencia);
+		competencia = new Competencia();
 		msg();
 	}
 
 	public void novo() {
-		medicamento = new Medicamento();
+		competencia = new Competencia();
 	}
 
-	public void excluir(Medicamento p) {
-		repo.excluir(p.getId());
+	public void excluir(Competencia p) {
+		competenciaService.excluir(p.getId());
 		msg();
 	}
 
-	public void editar(Medicamento p) {
-		medicamento = repo.buscarPorId(p.getId());
+	public void editar(Competencia p) {
+		competencia = competenciaService.buscarPorId(p.getId()).get();
 	}
 
 	public void pesquisar() {
 		Map<String, Object> filtros = new HashMap<String, Object>();
+
 		if (filtroNome != null && !filtroNome.isEmpty()) {
 			filtros.put("nome", filtroNome);
 		}
 
-		gdm.setFixedFilters(filtros);
-
-		medicamentos = gdm;
+		competencias.setFixedFilters(filtros);
 	}
 
-	public LazyDataModel<Medicamento> getMedicamentos() {
-		return medicamentos;
+
+	public Competencia getCompetencia() {
+		return competencia;
 	}
 
-	public Medicamento getMedicamento() {
-		return medicamento;
+	public void setCompetencia(Competencia competencia) {
+		this.competencia = competencia;
 	}
 
-	public void setMedicamento(Medicamento medicamento) {
-		this.medicamento = medicamento;
+	public LazyDataModel<Competencia> getCompetencias() {
+		return competencias;
 	}
 
 	public String getFiltroNome() {
@@ -87,8 +83,8 @@ public class MedicamentoBean implements Serializable {
 		this.filtroNome = filtroNome;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setCompetencias(GenericLazyDataModel<Competencia> competencias) {
+		this.competencias = competencias;
 	}
 
 	public void msg() {
