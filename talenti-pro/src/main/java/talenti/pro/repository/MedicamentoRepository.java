@@ -3,52 +3,22 @@ package talenti.pro.repository;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.Query;
 import talenti.pro.model.Medicamento;
 
-@ApplicationScoped
+@RequestScoped
 public class MedicamentoRepository extends GenericRepositoryImpl<Medicamento> {
 
-	@Inject
-	private EntityManager em;
 
 	public MedicamentoRepository() {
 		super(Medicamento.class);
-	}
-
-	@Override
-	public void salvar(Medicamento medicamento) {
-		em.getTransaction().begin();
-		if (medicamento.getId() == null) {
-			em.persist(medicamento);
-		} else {
-			em.merge(medicamento);
-		}
-
-		em.getTransaction().commit();
-	}
-
-	@Override
-	public void excluir(Long id) {
-		Medicamento Medicamento = em.find(Medicamento.class, id);
-		em.getTransaction().begin();
-		if (Medicamento != null) {
-			em.remove(Medicamento);
-		}
-		em.getTransaction().commit();
 	}
 
 	public List<Medicamento> listar() {
 		return em.createQuery("FROM Medicamento", Medicamento.class).getResultList();
 	}
 
-	@Override
-	public Medicamento buscarPorId(Long id) {
-		return em.find(Medicamento.class, id);
-	}
 
 	public List<Medicamento> buscar(String nome, String cpf) {
 		String jpql = "SELECT p FROM Medicamento p WHERE 1=1";

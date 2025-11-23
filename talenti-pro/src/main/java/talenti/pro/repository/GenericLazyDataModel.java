@@ -10,11 +10,11 @@ public class GenericLazyDataModel<T> extends LazyDataModel<T> {
 
 	private static final long serialVersionUID = 1L;
 
-	private final GenericRepository<T> repository;
+	private final GenericRepository<?> repository;
 
 	private Map<String, Object> fixedFilters;
 
-	public GenericLazyDataModel(GenericRepository<T> repository) {
+	public GenericLazyDataModel(GenericRepository<?> repository) {
 		this.repository = repository;
 	}
 

@@ -1,15 +1,18 @@
 package talenti.pro.repository;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceUnitUtil;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 
 @SuppressWarnings("unchecked")
-public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
+public abstract class GenericRepositoryImpl<T extends Serializable> implements GenericRepository<T> {
 
     @PersistenceContext(unitName = "talenti-pro-pu")
     protected EntityManager em;
@@ -20,15 +23,16 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
         this.clazz = clazz;
     }
 
-    @Override
-    @Transactional
-    public void salvar(T entidade) {
-        if (getId(entidade) != null) {
-            em.merge(entidade);
-        } else {
-            em.persist(entidade);
-        }
-    }
+	@Override
+	@Transactional
+	public T salvar(T entidade) {
+		if (getId(entidade) != null) {
+			return em.merge(entidade);
+		} else {
+			em.persist(entidade);
+			return entidade;
+		}
+	}
 
     @Override
     @Transactional
@@ -42,6 +46,11 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
     @Override
     public T buscarPorId(Long id) {
         return em.find(clazz, id);
+    }
+    
+    @Override
+    public Optional<T> buscarPorIdOpt(Long id) {
+        return Optional.ofNullable(em.find(clazz, id));
     }
 
 
@@ -71,11 +80,16 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
 
     @Override
     public Long contar(Map<String, Object> filters) {
+    	
         StringBuilder jpql = new StringBuilder("SELECT COUNT(e) FROM " + clazz.getSimpleName() + " e WHERE 1=1");
 
         if (filters != null) {
             for (String key : filters.keySet()) {
-                jpql.append(" AND LOWER(e.").append(key).append(") LIKE LOWER(:").append(key).append(")");
+                jpql.append(" AND LOWER(e.")
+                .append(key)
+                .append(") LIKE LOWER(:")
+                .append(key)
+                .append(")");
             }
         }
 
@@ -100,4 +114,17 @@ public abstract class GenericRepositoryImpl<T> implements GenericRepository<T> {
             return null;
         }
     }
+    
+    /**
+     * Obtém o ID da entidade usando API do JPA (padrão enterprise).
+     * Substitui reflexão insegura.
+     */
+	protected Object getEntityId(T entidade) {
+		try {
+			PersistenceUnitUtil util = em.getEntityManagerFactory().getPersistenceUnitUtil();
+			return util.getIdentifier(entidade);
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

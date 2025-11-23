@@ -5,22 +5,25 @@
                                  https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
 
-    <persistence-unit name="talenti-pro-pu" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="talenti-pro-pu" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+         <jta-data-source>java:/jdbc/talentiDS</jta-data-source>
        
-          <class>br.tec.ici.saude.model.Paciente</class>
-          <class>br.tec.ici.saude.model.Medicamento</class>
-          <class>br.tec.ici.saude.model.Receituario</class>
-          <class>br.tec.ici.saude.model.MedicamentoReceita</class>
+          <class>talenti.pro.model.Paciente</class>
+          <class>talenti.pro.model.Medicamento</class>
+          <class>talenti.pro.model.Receituario</class>
+          <class>talenti.pro.model.MedicamentoReceita</class>
       
 
         <properties>
+          <!--  ESTÁ USANDO A CONFIGURAÇÃO DE DATASOURCE DENTRO DO SERVIDOR WILDFLY
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/talenti-pro"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <property name="jakarta.persistence.jdbc.password" value="admin"/>
+           -->  
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.format_sql" value="false"/>
