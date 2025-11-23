@@ -1,4 +1,4 @@
-package talenti.pro.application;
+package talenti.pro.controller;
 
 import java.io.Serializable;
 

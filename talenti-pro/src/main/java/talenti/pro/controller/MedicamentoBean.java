@@ -1,4 +1,4 @@
-package talenti.pro.managedbean;
+package talenti.pro.controller;
 
 import java.io.Serializable;
 import java.util.HashMap;
