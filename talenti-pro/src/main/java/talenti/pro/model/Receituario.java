@@ -1,4 +1,4 @@
-package br.tec.ici.saude.model;
+package talenti.pro.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

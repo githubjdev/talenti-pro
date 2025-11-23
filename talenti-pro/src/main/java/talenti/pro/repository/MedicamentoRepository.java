@@ -1,13 +1,13 @@
-package br.tec.ici.saude.Repository;
+package talenti.pro.repository;
 
 import java.util.List;
 import java.util.Map;
 
-import br.tec.ici.saude.model.Medicamento;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import talenti.pro.model.Medicamento;
 
 @ApplicationScoped
 public class MedicamentoRepository extends GenericRepositoryImpl<Medicamento> {

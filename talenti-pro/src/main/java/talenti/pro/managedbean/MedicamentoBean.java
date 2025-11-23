@@ -1,4 +1,4 @@
-package br.tec.ici.saude.ManagedBean;
+package talenti.pro.managedbean;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -6,15 +6,15 @@ import java.util.Map;
 
 import org.primefaces.model.LazyDataModel;
 
-import br.tec.ici.saude.Repository.GenericLazyDataModel;
-import br.tec.ici.saude.Repository.MedicamentoRepository;
-import br.tec.ici.saude.model.Medicamento;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import talenti.pro.model.Medicamento;
+import talenti.pro.repository.GenericLazyDataModel;
+import talenti.pro.repository.MedicamentoRepository;
 
 @Named(value = "medicamentoBean")
 @ViewScoped

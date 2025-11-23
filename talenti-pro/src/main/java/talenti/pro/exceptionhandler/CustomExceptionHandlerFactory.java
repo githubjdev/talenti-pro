@@ -1,4 +1,4 @@
-package br.tec.ici.saude.ExceptionHandler;
+package talenti.pro.exceptionhandler;
 
 import jakarta.faces.context.ExceptionHandler;
 import jakarta.faces.context.ExceptionHandlerFactory;

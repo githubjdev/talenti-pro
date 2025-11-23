@@ -1,4 +1,4 @@
-package br.tec.ici.saude.Filter;
+package talenti.pro.filter;
 
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;

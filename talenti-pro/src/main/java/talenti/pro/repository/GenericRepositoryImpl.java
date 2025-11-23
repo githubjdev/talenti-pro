@@ -1,4 +1,4 @@
-package br.tec.ici.saude.Repository;
+package talenti.pro.repository;
 
 import java.util.List;
 import java.util.Map;

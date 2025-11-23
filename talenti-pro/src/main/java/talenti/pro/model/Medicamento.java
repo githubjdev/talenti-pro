@@ -1,4 +1,4 @@
-package br.tec.ici.saude.model;
+package talenti.pro.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

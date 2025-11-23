@@ -1,4 +1,4 @@
-package br.tec.ici.saude.medicamento.application;
+package talenti.pro.application;
 
 import java.io.Serializable;
 

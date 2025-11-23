@@ -1,4 +1,4 @@
-package br.tec.ici.saude.ExceptionHandler;
+package talenti.pro.exceptionhandler;
 
 import java.io.IOException;
 import java.util.Iterator;
