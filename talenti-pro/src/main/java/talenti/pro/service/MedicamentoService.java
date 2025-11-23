@@ -11,12 +11,12 @@ import talenti.pro.model.Medicamento;
 import talenti.pro.repository.MedicamentoRepository;
 
 @RequestScoped
+@Transactional
 public class MedicamentoService {
 
 	@Inject
 	private MedicamentoRepository repository;
 
-	@Transactional
 	public Medicamento salvar(Medicamento medicamento) {
 		validarMedicamento(medicamento);
 		return repository.salvar(medicamento);
