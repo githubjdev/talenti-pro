@@ -33,7 +33,7 @@ public class CompentenciaController extends ManagedBeanController {
 
 	public void salvar() {
 		competenciaService.salvar(competencia);
-		competencia = new Competencia();
+		novo();
 		infoSucesso();
 	}
 
