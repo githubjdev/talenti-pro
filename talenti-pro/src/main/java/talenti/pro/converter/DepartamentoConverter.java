@@ -9,25 +9,25 @@ import jakarta.faces.convert.ConverterException;
 import jakarta.faces.convert.FacesConverter;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import talenti.pro.model.Gestor;
-import talenti.pro.service.GestorService;
+import talenti.pro.model.Departamento;
+import talenti.pro.service.DepartamentoService;
 
 @Named
 @ApplicationScoped
-@FacesConverter(value = "gestorConverter", managed = true)
-public class GestorConverter implements Converter<Gestor> {
+@FacesConverter(value = "departamentoConverter", managed = true)
+public class DepartamentoConverter implements Converter<Departamento> {
 
 	@Inject
-	private GestorService gestorService;
+	private DepartamentoService departamentoService;
 
 	@Override
-	public Gestor getAsObject(FacesContext context, UIComponent component, String value) {
+	public Departamento getAsObject(FacesContext context, UIComponent component, String value) {
 		if (value != null && !value.trim().isEmpty()) {
 			try {
-				return gestorService.buscarPorId(Long.parseLong(value));
+				return departamentoService.buscarPorId(Long.parseLong(value));
 			} catch (NumberFormatException e) {
 				throw new ConverterException(
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid gestor."));
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid departamento."));
 			}
 		} else {
 			return null;
@@ -35,7 +35,7 @@ public class GestorConverter implements Converter<Gestor> {
 	}
 
 	@Override
-	public String getAsString(FacesContext context, UIComponent component, Gestor value) {
+	public String getAsString(FacesContext context, UIComponent component, Departamento value) {
 		if (value != null) {
 			return String.valueOf(value.getId());
 		} else {
