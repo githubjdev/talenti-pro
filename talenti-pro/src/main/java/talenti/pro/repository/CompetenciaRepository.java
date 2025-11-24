@@ -3,11 +3,11 @@ package talenti.pro.repository;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.Dependent;
 import jakarta.persistence.Query;
 import talenti.pro.model.Competencia;
 
-@RequestScoped
+@Dependent
 public class CompetenciaRepository extends GenericRepositoryImpl<Competencia> {
 
 

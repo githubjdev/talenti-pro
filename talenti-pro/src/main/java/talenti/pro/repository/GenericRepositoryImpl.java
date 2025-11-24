@@ -9,9 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceUnitUtil;
 import jakarta.persistence.Query;
-import jakarta.transaction.Transactional;
 
-@SuppressWarnings("unchecked")
 public abstract class GenericRepositoryImpl<T extends Serializable> implements GenericRepository<T> {
 
     @PersistenceContext
@@ -24,9 +22,8 @@ public abstract class GenericRepositoryImpl<T extends Serializable> implements G
     }
 
 	@Override
-	@Transactional
 	public T salvar(T entidade) {
-		if (getId(entidade) != null) {
+		if (getEntityId(entidade) != null) {
 			return em.merge(entidade);
 		} else {
 			em.persist(entidade);
@@ -35,7 +32,6 @@ public abstract class GenericRepositoryImpl<T extends Serializable> implements G
 	}
 
     @Override
-    @Transactional
     public void excluir(Long id) {
         T entidade = em.find(clazz, id);
         if (entidade != null) {
@@ -54,6 +50,7 @@ public abstract class GenericRepositoryImpl<T extends Serializable> implements G
     }
 
 
+	@SuppressWarnings("unchecked")
 	@Override
     public List<T> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
         StringBuilder jpql = new StringBuilder("SELECT e FROM " + clazz.getSimpleName() + " e WHERE 1=1");
@@ -105,26 +102,11 @@ public abstract class GenericRepositoryImpl<T extends Serializable> implements G
     }
 
     /**
-     * Método auxiliar para obter o ID de qualquer entidade.
-     */
-    private Object getId(T entity) {
-        try {
-            return entity.getClass().getMethod("getId").invoke(entity);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-    
-    /**
      * Obtém o ID da entidade usando API do JPA (padrão enterprise).
      * Substitui reflexão insegura.
      */
 	protected Object getEntityId(T entidade) {
-		try {
 			PersistenceUnitUtil util = em.getEntityManagerFactory().getPersistenceUnitUtil();
 			return util.getIdentifier(entidade);
-		} catch (Exception e) {
-			return null;
-		}
 	}
 }

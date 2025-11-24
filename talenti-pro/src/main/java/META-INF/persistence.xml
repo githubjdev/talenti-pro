@@ -8,14 +8,9 @@
     <persistence-unit name="talenti-pro-pu" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
          <jta-data-source>java:/jdbc/talentiDS</jta-data-source>
-       
-          <class>talenti.pro.model.Paciente</class>
-          <class>talenti.pro.model.Medicamento</class>
-          <class>talenti.pro.model.Receituario</class>
-          <class>talenti.pro.model.MedicamentoReceita</class>
-      
 
         <properties>
+         
           <!--  ESTÁ USANDO A CONFIGURAÇÃO DE DATASOURCE DENTRO DO SERVIDOR WILDFLY
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/talenti-pro"/>
@@ -34,6 +29,10 @@
             <property name="hibernate.cache.use_second_level_cache" value="true"/>
             <property name="hibernate.cache.use_query_cache" value="true"/>
             <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.jcache.JCacheRegionFactory"/>
+           
+            <property name="hibernate.jdbc.batch_size" value="30"/>
+			<property name="hibernate.order_inserts" value="true"/>
+			<property name="hibernate.order_updates" value="true"/>
             <property name="hibernate.connection.provider_disables_autocommit" value="true"/>
 		    
         </properties>

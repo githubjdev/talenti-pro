@@ -5,17 +5,19 @@ import java.util.Map;
 
 import org.primefaces.model.LazyDataModel;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
+import talenti.pro.service.ServiceInterface;
+
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class GenericLazyDataModel<T> extends LazyDataModel<T> {
 
 	private static final long serialVersionUID = 1L;
 
-	private final GenericRepository<?> repository;
+	private final ServiceInterface<?> service;
 
 	private Map<String, Object> fixedFilters;
 
-	public GenericLazyDataModel(GenericRepository<?> repository) {
-		this.repository = repository;
+	public GenericLazyDataModel(ServiceInterface<?> service) {
+		this.service = service;
 	}
 
 	public void setFixedFilters(Map<String, Object> fixedFilters) {
@@ -24,15 +26,15 @@ public class GenericLazyDataModel<T> extends LazyDataModel<T> {
 
 	@Override
 	public int count(Map filterBy) {
-		return repository.contar(this.fixedFilters).intValue();
+		return service.contar(this.fixedFilters).intValue();
 	}
 
 	@Override
 	public List load(int first, int pageSize, Map sortBy, Map filterBy) {
-		setRowCount(repository.contar(this.fixedFilters).intValue());
+		setRowCount(service.contar(this.fixedFilters).intValue());
 		setPageSize(pageSize);
 		setFixedFilters(this.fixedFilters);
-		return repository.listarPaginado(first, pageSize, this.fixedFilters);
+		return service.listarPaginado(first, pageSize, this.fixedFilters);
 	}
 
 }

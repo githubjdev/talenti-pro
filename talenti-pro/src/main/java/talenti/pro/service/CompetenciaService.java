@@ -11,19 +11,19 @@ import talenti.pro.model.Competencia;
 import talenti.pro.repository.CompetenciaRepository;
 
 @RequestScoped
-@Transactional
-public class CompetenciaService {
+public class CompetenciaService implements ServiceInterface<Competencia> {
 
 	@Inject
 	private CompetenciaRepository repository;
 
+	@Transactional
 	public Competencia salvar(Competencia competencia) {
 		if (competencia == null) {
 			throw new IllegalArgumentException("Competencia não pode ser nulo.");
 		}
 
 		if (competencia.getNome() == null || competencia.getNome().trim().isEmpty()) {
-			throw new IllegalArgumentException("Nome do Competencia é obrigatório.");
+			throw new IllegalArgumentException("Nome da Competencia é obrigatório.");
 		}
 		return repository.salvar(competencia);
 	}
@@ -31,10 +31,6 @@ public class CompetenciaService {
 	@Transactional
 	public void excluir(Long id) {
 		repository.excluir(id);
-	}
-
-	public Optional<Competencia> buscarPorId(Long id) {
-		return repository.buscarPorIdOpt(id);
 	}
 
 	public List<Competencia> listarTodos() {
@@ -53,8 +49,14 @@ public class CompetenciaService {
 		return repository.contar(filtros);
 	}
 
-	public CompetenciaRepository getRepository() {
-		return repository;
+	@Override
+	public Optional<Competencia> buscarPorIdOpt(Long id) {
+		return repository.buscarPorIdOpt(id);
+	}
+
+	@Override
+	public Competencia buscarPorId(Long id) {
+		return repository.buscarPorId(id);
 	}
 
 }

@@ -1,14 +1,11 @@
 package talenti.pro.controller;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.primefaces.model.LazyDataModel;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -18,25 +15,26 @@ import talenti.pro.service.CompetenciaService;
 
 @Named(value = "competenciaController")
 @ViewScoped
-public class CompentenciaController implements Serializable {
+public class CompentenciaController extends BeanController {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private CompetenciaService competenciaService;
 	private Competencia competencia = new Competencia();
-	private GenericLazyDataModel<Competencia> competencias;
 	private String filtroNome;
+
+	private GenericLazyDataModel<Competencia> competencias;
 
 	@PostConstruct
 	public void init() {
-		competencias = new GenericLazyDataModel<Competencia>(competenciaService.getRepository());
+		competencias = new GenericLazyDataModel<Competencia>(competenciaService);
 	}
 
 	public void salvar() {
 		competenciaService.salvar(competencia);
 		competencia = new Competencia();
-		msg();
+		infoSucesso();
 	}
 
 	public void novo() {
@@ -45,11 +43,11 @@ public class CompentenciaController implements Serializable {
 
 	public void excluir(Competencia p) {
 		competenciaService.excluir(p.getId());
-		msg();
+		infoSucesso();
 	}
 
 	public void editar(Competencia p) {
-		competencia = competenciaService.buscarPorId(p.getId()).get();
+		competencia = competenciaService.buscarPorId(p.getId());
 	}
 
 	public void pesquisar() {
@@ -61,7 +59,6 @@ public class CompentenciaController implements Serializable {
 
 		competencias.setFixedFilters(filtros);
 	}
-
 
 	public Competencia getCompetencia() {
 		return competencia;
@@ -83,12 +80,4 @@ public class CompentenciaController implements Serializable {
 		this.filtroNome = filtroNome;
 	}
 
-	public void setCompetencias(GenericLazyDataModel<Competencia> competencias) {
-		this.competencias = competencias;
-	}
-
-	public void msg() {
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Operação realizada!"));
-	}
 }
