@@ -17,15 +17,15 @@ public class GestorService implements ServiceInterface<Gestor> {
 	private GestorRepository repository;
 
 	@Transactional
-	public Gestor salvar(Gestor competencia) {
-		if (competencia == null) {
+	public Gestor salvar(Gestor gestor) {
+		if (gestor == null) {
 			throw new IllegalArgumentException("Gestor não pode ser nulo.");
 		}
 
-		if (competencia.getNome() == null || competencia.getNome().trim().isEmpty()) {
+		if (gestor.getNome() == null || gestor.getNome().trim().isEmpty()) {
 			throw new IllegalArgumentException("Nome da Gestor é obrigatório.");
 		}
-		return repository.salvar(competencia);
+		return repository.salvar(gestor);
 	}
 
 	@Transactional
