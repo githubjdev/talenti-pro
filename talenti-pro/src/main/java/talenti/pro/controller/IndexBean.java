@@ -1,14 +1,12 @@
 package talenti.pro.controller;
 
-import java.io.Serializable;
-
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
-@ViewScoped
 @Named(value = "indexBean")
-public class IndexBean implements Serializable {
+@ViewScoped
+public class IndexBean extends ManagedBeanController {
 
 	private static final long serialVersionUID = 1L;
 

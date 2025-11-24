@@ -15,7 +15,7 @@ import talenti.pro.service.CompetenciaService;
 
 @Named(value = "competenciaController")
 @ViewScoped
-public class CompentenciaController extends BeanController {
+public class CompentenciaController extends ManagedBeanController {
 
 	private static final long serialVersionUID = 1L;
 
