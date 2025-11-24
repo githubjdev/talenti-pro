@@ -7,18 +7,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
 @Entity
 @Table(name = "competencia")
+@SequenceGenerator(name = "seq_competencia", sequenceName = "seq_competencia", allocationSize = 1, initialValue = 1)
 public class Competencia implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_competencia")
 	private Long id;
 
 	@Column(nullable = false)
