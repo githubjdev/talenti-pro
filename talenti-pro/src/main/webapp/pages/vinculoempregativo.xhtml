@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<ui:composition 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-sistema.xhtml">
+
+
+<ui:define name="content">
+<h:form id="formBuscaVinculoEmpregativo">
+
+	    <p:panel header="Buscar Vínculo Empregativo" style="max-width:900px;margin:auto;">
+	        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
+	
+	            <p:outputLabel for="nomeBusca" value="Nome:" />
+	            <p:inputText id="nomeBusca" value="#{vinculoEmpregativoController.filtroNome}"
+	                         placeholder="Digite o nome do vínculo empregativo" style="width:100%" />
+	        </h:panelGrid>
+	
+	        <p:commandButton value="Pesquisar" icon="pi pi-search"
+	                         action="#{vinculoEmpregativoController.pesquisar}"
+	                         process="@form"
+	                         update="formVinculoEmpregativo:tabela msgs"
+	                         style="margin-top:10px;width:100%;" />
+	    </p:panel>
+	
+	</h:form>
+
+	<p:separator style="margin:40px 0" />
+
+	       <h:form id="formVinculoEmpregativo">
+				<p:panel header="Cadastro de Vínculo Empregativo"
+					style="max-width:900px;margin:auto;">
+
+				<h:inputHidden id="id" value="#{vinculoEmpregativoController.vinculoEmpregativo.id}" />
+ 				<h:panelGrid columns="2" style="width:100%" cellpadding="5">
+					
+					 <p:outputLabel  value="ID:" />
+					<p:inputText value="#{vinculoEmpregativoController.vinculoEmpregativo.id}" style="width:100%"
+						readonly="true" />
+						
+					<p:outputLabel value="Nome:" />	
+					<p:inputText value="#{vinculoEmpregativoController.vinculoEmpregativo.nome}"
+						placeholder="Nome" style="width:100%" 
+						required="true" />
+						
+
+				</h:panelGrid>	
+				<h:panelGroup layout="block" style="display:flex; gap:10px; margin-top:10px;">
+				    <p:commandButton value="Salvar" 
+				                     action="#{vinculoEmpregativoController.salvar}"
+				                     update="formVinculoEmpregativo tabela msgs"
+				                     icon="pi pi-save"
+				                     style="flex:1;" />
+				
+				    <p:commandButton value="Novo" 
+				                     action="#{vinculoEmpregativoController.novo}"
+				                     update="formVinculoEmpregativo tabela msgs"
+				                     icon="pi pi-plus"
+				                     style="flex:1;" />
+				</h:panelGroup>
+					
+				</p:panel>
+
+				<p:separator style="margin:20px 0" />
+				
+
+				<p:dataTable id="tabela" value="#{vinculoEmpregativoController.vinculoEmpregativos}" 
+				    var="p"
+				    paginator="true"
+				    lazy="true"
+				    rows="5"
+				    rowsPerPageTemplate="5,10,20,50"
+				    paginatorAlwaysVisible="true"
+				    paginatorPosition="top"
+					style="max-width:900px;margin:auto;">
+					<p:column headerText="ID">#{p.id}</p:column>
+					<p:column headerText="Nome">#{p.nome}</p:column>
+					<p:column headerText="Ações">
+					<p:commandButton icon="pi pi-pencil"
+					    action="#{vinculoEmpregativoController.editar(p)}"
+					    update=":formVinculoEmpregativo"
+					    process="@this"
+					    immediate="true"
+					    styleClass="ui-button-warning"
+					    title="Editar"/>
+					
+					<p:commandButton icon="pi pi-trash"
+					    action="#{vinculoEmpregativoController.excluir(p)}"
+					    update="tabela :formVinculoEmpregativo msgs"
+					    process="@this"
+					    immediate="true"
+					    styleClass="ui-button-danger"
+					    title="Excluir" />
+
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<p:separator style="margin:50px 0" />	
+	</ui:define>
+</ui:composition>
