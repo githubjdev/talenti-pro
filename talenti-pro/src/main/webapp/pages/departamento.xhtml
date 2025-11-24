@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<ui:composition xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-sistema.xhtml">
+
+
+<ui:define name="content">
+<h:form id="formBuscaDepartamento">
+
+	    <p:panel header="Buscar Departamento" style="max-width:900px;margin:auto;">
+	        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
+	
+	            <p:outputLabel for="nomeBusca" value="Nome:" />
+	            <p:inputText id="nomeBusca" value="#{departamentoController.filtroNome}"
+	                         placeholder="Digite o nome do departamento" style="width:100%" />
+                      
+	        </h:panelGrid>
+	
+	        <p:commandButton value="Pesquisar" icon="pi pi-search"
+	                         action="#{departamentoController.pesquisar}"
+	                         process="@form"
+	                         update="formDepartamento:tabela msgs"
+	                         style="margin-top:10px;width:100%;" />
+	    </p:panel>
+	
+	</h:form>
+
+	<p:separator style="margin:40px 0" />
+
+	       <h:form id="formDepartamento">
+				<p:panel header="Cadastro de Departamento"
+					style="max-width:900px;margin:auto;">
+
+				<h:inputHidden id="id" value="#{departamentoController.departamento.id}" />
+ 				<h:panelGrid columns="2" style="width:100%" cellpadding="5">
+					
+					 <p:outputLabel  value="ID:" />
+					<p:inputText value="#{departamentoController.departamento.id}" style="width:100%"
+						readonly="true" />
+						
+					<p:outputLabel value="Nome:" />	
+					<p:inputText value="#{departamentoController.departamento.nome}"
+						placeholder="Nome" style="width:100%" 
+						required="true" />
+						
+						
+	                         
+ 				<p:outputLabel for="nomeGestor" value="Gestor:" />
+ 				<p:selectOneMenu id="nomeGestor" style="width:100%"
+ 				       value="#{departamentoController.departamento.gestor}"
+ 				       converter="#{gestorConverter}"> 
+ 				       
+ 				       <f:selectItems value="#{departamentoController.gestors}"
+ 				       var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
+ 				</p:selectOneMenu>  
+
+				</h:panelGrid>	
+				<h:panelGroup layout="block" style="display:flex; gap:10px; margin-top:10px;">
+				    <p:commandButton value="Salvar" 
+				                     action="#{departamentoController.salvar}"
+				                     update="formDepartamento tabela msgs"
+				                     icon="pi pi-save"
+				                     style="flex:1;" />
+				
+				    <p:commandButton value="Novo" 
+				                     action="#{departamentoController.novo}"
+				                     update="formDepartamento tabela msgs"
+				                     icon="pi pi-plus"
+				                     style="flex:1;" />
+				</h:panelGroup>
+					
+				</p:panel>
+
+				<p:separator style="margin:20px 0" />
+				
+
+				<p:dataTable id="tabela" value="#{departamentoController.departamentos}" 
+				    var="p"
+				    paginator="true"
+				    lazy="true"
+				    rows="5"
+				    rowsPerPageTemplate="5,10,20,50"
+				    paginatorAlwaysVisible="true"
+				    paginatorPosition="top"
+					style="max-width:900px;margin:auto;">
+					<p:column headerText="ID">#{p.id}</p:column>
+					<p:column headerText="Nome">#{p.nome}</p:column>
+					<p:column headerText="Ações">
+					<p:commandButton icon="pi pi-pencil"
+					    action="#{departamentoController.editar(p)}"
+					    update=":formDepartamento"
+					    process="@this"
+					    immediate="true"
+					    styleClass="ui-button-warning"
+					    title="Editar"/>
+					
+					<p:commandButton icon="pi pi-trash"
+					    action="#{departamentoController.excluir(p)}"
+					    update="tabela :formDepartamento msgs"
+					    process="@this"
+					    immediate="true"
+					    styleClass="ui-button-danger"
+					    title="Excluir" />
+
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<p:separator style="margin:50px 0" />	
+	</ui:define>
+</ui:composition>

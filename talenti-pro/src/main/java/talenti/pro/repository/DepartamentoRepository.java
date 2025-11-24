@@ -5,29 +5,27 @@ import java.util.Map;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.persistence.Query;
-import talenti.pro.model.Competencia;
+import talenti.pro.model.Departamento;
 
 @Dependent
-public class CompetenciaRepository extends GenericRepositoryImpl<Competencia> {
+public class DepartamentoRepository extends GenericRepositoryImpl<Departamento> {
 
-
-	public CompetenciaRepository() {
-		super(Competencia.class);
+	public DepartamentoRepository() {
+		super(Departamento.class);
 	}
 
-	public List<Competencia> listar() {
-		return em.createQuery("select c FROM Competencia c", Competencia.class).getResultList();
+	public List<Departamento> listar() {
+		return em.createQuery("select d FROM Departamento d", Departamento.class).getResultList();
 	}
 
-
-	public List<Competencia> buscar(String nome, String cpf) {
-		String jpql = "SELECT p FROM Competencia p WHERE 1=1";
+	public List<Departamento> buscar(String nome, String cpf) {
+		String jpql = "SELECT p FROM Departamento p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {
 			jpql += " AND LOWER(p.nome) LIKE LOWER(:nome)";
 		}
 
-		var query = em.createQuery(jpql, Competencia.class);
+		var query = em.createQuery(jpql, Departamento.class);
 		if (nome != null && !nome.trim().isEmpty()) {
 			query.setParameter("nome", "%" + nome + "%");
 		}
@@ -37,8 +35,8 @@ public class CompetenciaRepository extends GenericRepositoryImpl<Competencia> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Competencia> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM competencia WHERE 1=1");
+	public List<Departamento> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM Departamento WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
@@ -52,7 +50,7 @@ public class CompetenciaRepository extends GenericRepositoryImpl<Competencia> {
 
 		sql.append(" LIMIT :limit OFFSET :offset");
 
-		Query query = em.createNativeQuery(sql.toString(), Competencia.class);
+		Query query = em.createNativeQuery(sql.toString(), Departamento.class);
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
@@ -70,7 +68,7 @@ public class CompetenciaRepository extends GenericRepositoryImpl<Competencia> {
 
 	@Override
 	public Long contar(Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM competencia WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM departamento WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
