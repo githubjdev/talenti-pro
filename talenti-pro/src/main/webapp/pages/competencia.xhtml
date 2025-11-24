@@ -8,7 +8,7 @@
 <ui:define name="content">
 <h:form id="formBuscaCompetencia">
 
-	    <p:panel header="Buscar Competencia" style="max-width:600px;margin:auto;">
+	    <p:panel header="Buscar Competencia" style="max-width:900px;margin:auto;">
 	        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
 	
 	            <p:outputLabel for="nomeBusca" value="Nome:" />
@@ -29,7 +29,7 @@
 
 	       <h:form id="formCompetencia">
 				<p:panel header="Cadastro de Competencia"
-					style="max-width:600px;margin:auto;">
+					style="max-width:900px;margin:auto;">
 
 				<h:inputHidden id="id" value="#{competenciaController.competencia.id}" />
  				<h:panelGrid columns="2" style="width:100%" cellpadding="5">
@@ -72,7 +72,7 @@
 				    rowsPerPageTemplate="5,10,20,50"
 				    paginatorAlwaysVisible="true"
 				    paginatorPosition="top"
-					style="max-width:600px;margin:auto;">
+					style="max-width:900px;margin:auto;">
 					<p:column headerText="ID">#{p.id}</p:column>
 					<p:column headerText="Nome">#{p.nome}</p:column>
 					<p:column headerText="Ações">
@@ -82,7 +82,7 @@
 					    process="@this"
 					    immediate="true"
 					    styleClass="ui-button-warning"
-					    title="Editar" />
+					    title="Editar"/>
 					
 					<p:commandButton icon="pi pi-trash"
 					    action="#{competenciaController.excluir(p)}"
