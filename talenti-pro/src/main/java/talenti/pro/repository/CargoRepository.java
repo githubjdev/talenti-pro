@@ -13,6 +13,8 @@ public class CargoRepository extends GenericRepositoryImpl<Cargo> {
 	public CargoRepository() {
 		super(Cargo.class);
 	}
+	
+	
 
 	public List<Cargo> listar() {
 		return em.createQuery("select f FROM Cargo f", Cargo.class).getResultList();

@@ -42,7 +42,7 @@
 						
 					<p:outputLabel value="Nome:" />	
 					<p:inputText value="#{cargoController.cargo.nome}"
-						placeholder="Nome" style="width:100%" 
+						placeholder="Nome" style="width:100%" label="Nome do cargo"
 						required="true" />
 						
 
@@ -92,10 +92,12 @@
 					    process="@this"
 					    immediate="true"
 					    styleClass="ui-button-danger"
-					    title="Excluir" />
+					    title="Excluir" 
+					    onclick="return confirm('Deseja realmente excluir o cargo #{p.nome}?');"/>
 
 					</p:column>
 				</p:dataTable>
+				
 			</h:form>
 			<p:separator style="margin:50px 0" />	
 	</ui:define>

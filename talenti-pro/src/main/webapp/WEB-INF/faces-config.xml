@@ -5,13 +5,13 @@
 	version="4.0">
 
 	<application>
-
+		<message-bundle>messages</message-bundle>
 	</application>
+
 
 	<factory>
 		<exception-handler-factory>
-			talenti.pro.exceptionhandler.CustomExceptionHandlerFactory
-		</exception-handler-factory>
+			talenti.pro.exceptionhandler.CustomExceptionHandlerFactory</exception-handler-factory>
 	</factory>
 
 </faces-config>
