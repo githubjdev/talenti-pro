@@ -4,7 +4,7 @@
 	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
 	version="6.0">
 
-	<display-name>Medicamento</display-name>
+	<display-name>Talenti PRO</display-name>
 
 	<welcome-file-list>
 		<welcome-file>pages/index.xhtml</welcome-file>
@@ -32,7 +32,7 @@
 	</context-param>
 
 	<context-param>
-		<param-name>javax.faces.FACELETS_BUFFER_SIZE</param-name>
+		<param-name>jakarta.faces.FACELETS_BUFFER_SIZE</param-name>
 		<param-value>8192</param-value>
 	</context-param>
 
