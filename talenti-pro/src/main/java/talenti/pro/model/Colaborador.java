@@ -40,13 +40,60 @@ public class Colaborador implements Serializable {
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "departamento_id", nullable = false, foreignKey = @ForeignKey(name = "departamento_id"))
 	private Departamento departamento;
-	
+
 	@Column(nullable = false)
 	private LocalDate dataAdmissao;
-	
+
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "vinculo_empregativo_id", nullable = false, foreignKey = @ForeignKey(name = "vinculo_empregativo_id"))
 	private VinculoEmpregativo vinculoEmpregativo;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+
+	public LocalDate getDataAdmissao() {
+		return dataAdmissao;
+	}
+
+	public void setDataAdmissao(LocalDate dataAdmissao) {
+		this.dataAdmissao = dataAdmissao;
+	}
+
+	public VinculoEmpregativo getVinculoEmpregativo() {
+		return vinculoEmpregativo;
+	}
+
+	public void setVinculoEmpregativo(VinculoEmpregativo vinculoEmpregativo) {
+		this.vinculoEmpregativo = vinculoEmpregativo;
+	}
 
 }
