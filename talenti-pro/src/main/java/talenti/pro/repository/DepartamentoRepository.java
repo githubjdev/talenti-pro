@@ -33,7 +33,6 @@ public class DepartamentoRepository extends GenericRepositoryImpl<Departamento> 
 		return query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Departamento> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM Departamento WHERE 1=1");

@@ -35,7 +35,6 @@ public class CompetenciaRepository extends GenericRepositoryImpl<Competencia> {
 		return query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Competencia> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM competencia WHERE 1=1");

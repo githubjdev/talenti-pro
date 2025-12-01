@@ -33,7 +33,6 @@ public class GestorRepository extends GenericRepositoryImpl<Gestor> {
 		return query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Gestor> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM Gestor WHERE 1=1");

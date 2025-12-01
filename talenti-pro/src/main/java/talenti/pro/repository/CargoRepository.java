@@ -35,7 +35,6 @@ public class CargoRepository extends GenericRepositoryImpl<Cargo> {
 		return query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Cargo> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM Cargo WHERE 1=1");

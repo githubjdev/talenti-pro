@@ -33,7 +33,6 @@ public class VinculoEmpregativoRepository extends GenericRepositoryImpl<VinculoE
 		return query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<VinculoEmpregativo> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM vinculo_empregativo WHERE 1=1");

@@ -7,7 +7,6 @@ import org.primefaces.model.LazyDataModel;
 
 import talenti.pro.service.ServiceInterface;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
 public class GenericLazyDataModel<T> extends LazyDataModel<T> {
 
 	private static final long serialVersionUID = 1L;

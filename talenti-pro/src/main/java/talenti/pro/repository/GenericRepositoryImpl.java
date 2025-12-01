@@ -50,7 +50,6 @@ public abstract class GenericRepositoryImpl<T extends Serializable> implements G
     }
 
 
-	@SuppressWarnings("unchecked")
 	@Override
     public List<T> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
         StringBuilder jpql = new StringBuilder("SELECT e FROM " + clazz.getSimpleName() + " e WHERE 1=1");
