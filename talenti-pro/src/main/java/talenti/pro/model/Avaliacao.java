@@ -32,25 +32,25 @@ public class Avaliacao implements Serializable {
 
 	@Column(nullable = false)
 	private String nome;
-	
+
 	@Column(nullable = false)
 	private String descricao;
-	
+
 	@Column(nullable = false)
 	private LocalDate dataPrazoRealizacao;
-	
+
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "departamento_id", nullable = false, foreignKey = @ForeignKey(name = "departamento_fk"))
 	private Departamento departamento;
-	
+
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "competencia_id", nullable = false, foreignKey = @ForeignKey(name = "competencia_fk"))
 	private Competencia competencia;
-	
+
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "cargo_id", nullable = false, foreignKey = @ForeignKey(name = "cargo_fk"))
 	private Cargo cargo;
-	
+
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "vinculo_empregativo_id", nullable = false, foreignKey = @ForeignKey(name = "vinculo_empregativo_fk"))
 	private VinculoEmpregativo vinculoEmpregativo;
@@ -66,10 +66,57 @@ public class Avaliacao implements Serializable {
 	public String getNome() {
 		return nome;
 	}
-	
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public LocalDate getDataPrazoRealizacao() {
+		return dataPrazoRealizacao;
+	}
+
+	public void setDataPrazoRealizacao(LocalDate dataPrazoRealizacao) {
+		this.dataPrazoRealizacao = dataPrazoRealizacao;
+	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+
+	public Competencia getCompetencia() {
+		return competencia;
+	}
+
+	public void setCompetencia(Competencia competencia) {
+		this.competencia = competencia;
+	}
+
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+	public VinculoEmpregativo getVinculoEmpregativo() {
+		return vinculoEmpregativo;
+	}
+
+	public void setVinculoEmpregativo(VinculoEmpregativo vinculoEmpregativo) {
+		this.vinculoEmpregativo = vinculoEmpregativo;
 	}
 
 }
