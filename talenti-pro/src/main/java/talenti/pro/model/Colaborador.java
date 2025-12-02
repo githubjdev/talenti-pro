@@ -33,19 +33,35 @@ public class Colaborador implements Serializable {
 	@Column(nullable = false)
 	private String nome;
 
+	@Column(nullable = false)
+	private String email;
+
+	@Column(nullable = false)
+	private LocalDate dataNascimento;
+
+	@Column(nullable = false)
+	private String cpf;
+
+	@Column(nullable = false)
+	private String escolaridade;
+
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name = "cargo_id", nullable = false, foreignKey = @ForeignKey(name = "cargo_id"))
+	@JoinColumn(name = "cargo_id", nullable = false, foreignKey = @ForeignKey(name = "cargo_fk"))
 	private Cargo cargo;
 
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name = "departamento_id", nullable = false, foreignKey = @ForeignKey(name = "departamento_id"))
+	@JoinColumn(name = "superior_id", nullable = false, foreignKey = @ForeignKey(name = "superior_fk"))
+	private Cargo superior;
+
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name = "departamento_id", nullable = false, foreignKey = @ForeignKey(name = "departamento_fk"))
 	private Departamento departamento;
 
 	@Column(nullable = false)
 	private LocalDate dataAdmissao;
 
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name = "vinculo_empregativo_id", nullable = false, foreignKey = @ForeignKey(name = "vinculo_empregativo_id"))
+	@JoinColumn(name = "vinculo_empregativo_id", nullable = false, foreignKey = @ForeignKey(name = "vinculo_empregativo_fk"))
 	private VinculoEmpregativo vinculoEmpregativo;
 
 	public Long getId() {

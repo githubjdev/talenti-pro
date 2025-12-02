@@ -33,7 +33,7 @@ public class Departamento implements Serializable {
 	private String nome;
 
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name = "gestor_id", nullable = false, foreignKey = @ForeignKey(name = "gestor_id"))
+	@JoinColumn(name = "gestor_id", nullable = false, foreignKey = @ForeignKey(name = "gestor_fk"))
 	private Gestor gestor;
 
 	public Long getId() {
