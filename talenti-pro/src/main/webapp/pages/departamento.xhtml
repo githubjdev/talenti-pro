@@ -43,7 +43,7 @@
 						
 					<p:outputLabel value="Nome:" />	
 					<p:inputText value="#{departamentoController.departamento.nome}"
-						placeholder="Nome" style="width:100%" 
+						placeholder="Nome" style="width:100%" label="Nome"
 						required="true" />
 						
 						
@@ -103,7 +103,12 @@
 					    process="@this"
 					    immediate="true"
 					    styleClass="ui-button-danger"
-					    title="Excluir" />
+					    title="Excluir" >
+					    
+                           <p:confirm header="Confirmar" 
+				               message="Tem certeza que deseja excluir o registro?"
+				               icon="pi pi-exclamation-triangle" />						    
+					    </p:commandButton>
 
 					</p:column>
 				</p:dataTable>

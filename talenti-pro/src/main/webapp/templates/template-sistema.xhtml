@@ -31,6 +31,7 @@
 					<p:menuitem value="Cargo" outcome="/pages/cargo.xhtml" icon="pi pi-plus" />		
 					<p:menuitem value="Departamento" outcome="/pages/departamento.xhtml" icon="pi pi-plus" />
 					<p:menuitem value="Gestor" outcome="/pages/gestor.xhtml" icon="pi pi-plus" />		
+					<p:menuitem value="Pergunta" outcome="/pages/pergunta.xhtml" icon="pi pi-plus" />
 					<p:menuitem value="Vínculo Empregativo" outcome="/pages/vinculoempregativo.xhtml" icon="pi pi-plus" />		
 
 				</p:submenu>
@@ -49,6 +50,12 @@
 				Todos os direitos reservados</div>
 		</footer>
 		
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+		                 closeOnEscape="true" width="350">
+		    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+		    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+		</p:confirmDialog>
+				
 	</div>
 </h:body>
 </html>

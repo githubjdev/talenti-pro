@@ -8,20 +8,21 @@
 
 
 <ui:define name="content">
-<h:form id="formBuscaCompetencia">
+<h:form id="formBuscaPergunta">
 
-	    <p:panel header="Buscar Competencia" style="max-width:80%;margin:auto;">
+	    <p:panel header="Buscar Pergunta" style="max-width:80%;margin:auto;">
 	        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
 	
 	            <p:outputLabel for="nomeBusca" value="Nome:" />
-	            <p:inputText id="nomeBusca" value="#{competenciaController.filtroNome}"
-	                         placeholder="Digite o nome da competência" style="width:100%" />
+	            <p:inputText id="nomeBusca" value="#{perguntaController.filtroNome}"
+	                         placeholder="Digite a descrição da pergunta" style="width:100%" />
+                      
 	        </h:panelGrid>
 	
-	        <p:commandButton value="Pesquisar" icon="pi pi-search" 
-	                         action="#{competenciaController.pesquisar}"
+	        <p:commandButton value="Pesquisar" icon="pi pi-search"
+	                         action="#{perguntaController.pesquisar}"
 	                         process="@form"
-	                         update="formCompetencia:tabela msgs"
+	                         update="formPergunta:tabela msgs"
 	                         style="margin-top:10px;width:100%;" />
 	    </p:panel>
 	
@@ -29,34 +30,45 @@
 
 	<p:separator style="margin:40px 0" />
 
-	       <h:form id="formCompetencia">
-				<p:panel header="Cadastro de Competencia"
+	       <h:form id="formPergunta">
+				<p:panel header="Cadastro de Pergunta"
 					style="max-width:80%;margin:auto;">
 
-				<h:inputHidden id="id" value="#{competenciaController.competencia.id}" />
+				<h:inputHidden id="id" value="#{perguntaController.pergunta.id}" />
  				<h:panelGrid columns="2" style="width:100%" cellpadding="5">
 					
 					 <p:outputLabel  value="ID:" />
-					<p:inputText value="#{competenciaController.competencia.id}" style="width:100%"
+					<p:inputText value="#{perguntaController.pergunta.id}" style="width:100%"
 						readonly="true" />
 						
 					<p:outputLabel value="Nome:" />	
-					<p:inputText value="#{competenciaController.competencia.nome}"
-						placeholder="Nome" style="width:100%" label="Nome"
+					<p:inputText value="#{perguntaController.pergunta.descricao}"
+						placeholder="Nome" style="width:100%" label="Descrição"
 						required="true" />
 						
+						
+	                         
+ 				<p:outputLabel for="nomeCompetencia" value="Competência:" />
+ 				<p:selectOneMenu id="nomeCompetencia" style="width:100%"
+ 				       value="#{perguntaController.pergunta.competencia}"
+ 				       converter="#{competenciaConverter}" 
+ 				       required="true" label="Competência"> 
+ 				       
+ 				       <f:selectItems value="#{perguntaController.competencias}"
+ 				       var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
+ 				</p:selectOneMenu>  
 
 				</h:panelGrid>	
 				<h:panelGroup layout="block" style="display:flex; gap:10px; margin-top:10px;">
 				    <p:commandButton value="Salvar" 
-				                     action="#{competenciaController.salvar}"
-				                     update="formCompetencia tabela msgs"
+				                     action="#{perguntaController.salvar}"
+				                     update="formPergunta tabela msgs"
 				                     icon="pi pi-save"
 				                     style="flex:1;" />
 				
 				    <p:commandButton value="Novo" 
-				                     action="#{competenciaController.novo}"
-				                     update="formCompetencia tabela msgs"
+				                     action="#{perguntaController.novo}"
+				                     update="formPergunta tabela msgs"
 				                     icon="pi pi-plus"
 				                     style="flex:1;" />
 				</h:panelGroup>
@@ -66,7 +78,7 @@
 				<p:separator style="margin:20px 0" />
 				
 
-				<p:dataTable id="tabela" value="#{competenciaController.competencias}" 
+				<p:dataTable id="tabela" value="#{perguntaController.perguntas}" 
 				    var="p"
 				    paginator="true"
 				    lazy="true"
@@ -76,27 +88,27 @@
 				    paginatorPosition="top"
 					style="max-width:80%;margin:auto;">
 					<p:column headerText="ID">#{p.id}</p:column>
-					<p:column headerText="Nome">#{p.nome}</p:column>
+					<p:column headerText="Nome">#{p.descricao}</p:column>
 					<p:column headerText="Ações">
 					<p:commandButton icon="pi pi-pencil"
-					    action="#{competenciaController.editar(p)}"
-					    update=":formCompetencia"
+					    action="#{perguntaController.editar(p)}"
+					    update=":formPergunta"
 					    process="@this"
 					    immediate="true"
 					    styleClass="ui-button-warning"
 					    title="Editar"/>
 					
 					<p:commandButton icon="pi pi-trash"
-					    action="#{competenciaController.excluir(p)}"
-					    update="tabela :formCompetencia msgs"
+					    action="#{perguntaController.excluir(p)}"
+					    update="tabela :formPergunta msgs"
 					    process="@this"
 					    immediate="true"
 					    styleClass="ui-button-danger"
 					    title="Excluir">
                            <p:confirm header="Confirmar" 
 				               message="Tem certeza que deseja excluir o registro?"
-				               icon="pi pi-exclamation-triangle" />		    
-					</p:commandButton>
+				               icon="pi pi-exclamation-triangle" />						    
+					 </p:commandButton>
 
 					</p:column>
 				</p:dataTable>

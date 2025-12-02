@@ -38,40 +38,45 @@
  				<h:panelGrid columns="2" style="width:100%" cellpadding="5">
 					
 				<p:outputLabel  value="ID:" />
-				<p:inputText value="#{colaboradorController.colaborador.id}" style="width:100%" readonly="true" />
+				<p:inputText value="#{colaboradorController.colaborador.id}" 
+				style="width:100%" readonly="true" />
 						
 				<p:outputLabel value="Nome:" />	
-				<p:inputText value="#{colaboradorController.colaborador.nome}" placeholder="Nome" style="width:100%"  required="true" />
+				<p:inputText value="#{colaboradorController.colaborador.nome}" 
+				placeholder="Nome" style="width:100%"  required="true" label="Nome do colaborador"/>
 				
 				<p:outputLabel value="Data de Admissão:" />			
-				<p:datePicker value="#{colaboradorController.colaborador.dataAdmissao}" pattern="dd/MM/yyyy"  style="width:100%"/>
+				<p:datePicker value="#{colaboradorController.colaborador.dataAdmissao}"
+				 pattern="dd/MM/yyyy"  style="width:100%" required="true" label="Data de admissão"/>
 						
 	                         
  				<p:outputLabel for="nomeCargo" value="Cargo:" />
- 				<p:selectOneMenu id="nomeCargo" style="width:100%"
+ 				<p:selectOneMenu id="nomeCargo" style="width:100%" required="true"
  				       value="#{colaboradorController.colaborador.cargo}"
- 				       converter="#{cargoConverter}"> 
+ 				       converter="#{cargoConverter}" label="Cargo"> 
  				       
  				       <f:selectItems value="#{colaboradorController.cargos}"
  				       var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
  				</p:selectOneMenu>  
  				
  				<p:outputLabel for="nomeDepart" value="Departamento:" />
- 				<p:selectOneMenu id="nomeDepart" style="width:100%"
+ 				<p:selectOneMenu id="nomeDepart" style="width:100%" required="true"
  				       value="#{colaboradorController.colaborador.departamento}"
- 				       converter="#{departamentoConverter}"> 
+ 				       converter="#{departamentoConverter}" 
+ 				       label="Departamento"> 
  				       
  				       <f:selectItems value="#{colaboradorController.departamentos}"
  				       var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
  				</p:selectOneMenu>
  				
  				<p:outputLabel for="nomeVincEmp" value="Vínculo Empregativo:" />
- 				<p:selectOneMenu id="nomeVincEmp" style="width:100%"
+ 				<p:selectOneMenu id="nomeVincEmp" style="width:100%" required="true"
  				       value="#{colaboradorController.colaborador.vinculoEmpregativo}"
- 				       converter="#{vinculoEmpregativoConverter}"> 
+ 				       converter="#{vinculoEmpregativoConverter}" 
+ 				       label="Vínculo empregaticío"> 
  				       
  				       <f:selectItems value="#{colaboradorController.vinculoEmpregativos}"
- 				       var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
+ 				       var="g" itemLabel="#{g.nome}" itemValue="#{g}" />
  				</p:selectOneMenu>   	 				   				
 
 				</h:panelGrid>	
@@ -120,7 +125,12 @@
 					    process="@this"
 					    immediate="true"
 					    styleClass="ui-button-danger"
-					    title="Excluir" />
+					    title="Excluir" >
+					
+			                   <p:confirm header="Confirmar" 
+				               message="Tem certeza que deseja excluir o registro?"
+				               icon="pi pi-exclamation-triangle" />					
+					</p:commandButton>
 
 					</p:column>
 				</p:dataTable>

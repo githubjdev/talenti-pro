@@ -92,8 +92,12 @@
 					    process="@this"
 					    immediate="true"
 					    styleClass="ui-button-danger"
-					    title="Excluir" 
-					    onclick="return confirm('Deseja realmente excluir o cargo #{p.nome}?');"/>
+					    title="Excluir">
+					    
+					        <p:confirm header="Confirmar" 
+				               message="Tem certeza que deseja excluir o registro?"
+				               icon="pi pi-exclamation-triangle" />
+					 </p:commandButton>
 
 					</p:column>
 				</p:dataTable>
