@@ -20,7 +20,7 @@ public class CargoRepository extends GenericRepositoryImpl<Cargo> {
 		return em.createQuery("select f FROM Cargo f", Cargo.class).getResultList();
 	}
 
-	public List<Cargo> buscar(String nome, String cpf) {
+	public List<Cargo> buscar(String nome) {
 		String jpql = "SELECT p FROM Cargo p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {

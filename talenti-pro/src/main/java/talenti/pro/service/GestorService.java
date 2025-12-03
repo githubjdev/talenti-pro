@@ -37,8 +37,8 @@ public class GestorService implements ServiceInterface<Gestor> {
 		return repository.listar();
 	}
 
-	public List<Gestor> buscarPorNome(String nome, String cpf) {
-		return repository.buscar(nome, cpf);
+	public List<Gestor> buscarPorNome(String nome) {
+		return repository.buscar(nome);
 	}
 
 	public List<Gestor> listarPaginado(int first, int pageSize, Map<String, Object> filtros) {

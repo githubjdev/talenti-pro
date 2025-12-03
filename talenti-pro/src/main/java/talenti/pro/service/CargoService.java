@@ -37,8 +37,8 @@ public class CargoService implements ServiceInterface<Cargo> {
 		return repository.listar();
 	}
 
-	public List<Cargo> buscarPorNome(String nome, String cpf) {
-		return repository.buscar(nome, cpf);
+	public List<Cargo> buscarPorNome(String nome) {
+		return repository.buscar(nome);
 	}
 
 	public List<Cargo> listarPaginado(int first, int pageSize, Map<String, Object> filtros) {

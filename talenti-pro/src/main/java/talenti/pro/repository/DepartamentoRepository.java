@@ -18,7 +18,7 @@ public class DepartamentoRepository extends GenericRepositoryImpl<Departamento> 
 		return em.createQuery("select d FROM Departamento d", Departamento.class).getResultList();
 	}
 
-	public List<Departamento> buscar(String nome, String cpf) {
+	public List<Departamento> buscar(String nome) {
 		String jpql = "SELECT p FROM Departamento p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {

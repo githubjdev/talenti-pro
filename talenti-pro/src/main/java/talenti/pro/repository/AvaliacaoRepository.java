@@ -19,7 +19,7 @@ public class AvaliacaoRepository extends GenericRepositoryImpl<Avaliacao> {
 		return em.createQuery("select f FROM Avaliacao f", Avaliacao.class).getResultList();
 	}
 
-	public List<Avaliacao> buscar(String nome, String cpf) {
+	public List<Avaliacao> buscar(String nome) {
 		String jpql = "SELECT p FROM Avaliacao p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {

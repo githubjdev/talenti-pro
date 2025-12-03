@@ -37,8 +37,8 @@ public class VinculoEmpregativoService implements ServiceInterface<VinculoEmpreg
 		return repository.listar();
 	}
 
-	public List<VinculoEmpregativo> buscarPorNome(String nome, String cpf) {
-		return repository.buscar(nome, cpf);
+	public List<VinculoEmpregativo> buscarPorNome(String nome) {
+		return repository.buscar(nome);
 	}
 
 	public List<VinculoEmpregativo> listarPaginado(int first, int pageSize, Map<String, Object> filtros) {

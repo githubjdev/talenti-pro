@@ -18,7 +18,7 @@ public class GestorRepository extends GenericRepositoryImpl<Gestor> {
 		return em.createQuery("select f FROM Gestor f", Gestor.class).getResultList();
 	}
 
-	public List<Gestor> buscar(String nome, String cpf) {
+	public List<Gestor> buscar(String nome) {
 		String jpql = "SELECT p FROM Gestor p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {

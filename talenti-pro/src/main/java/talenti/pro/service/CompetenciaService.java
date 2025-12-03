@@ -37,8 +37,8 @@ public class CompetenciaService implements ServiceInterface<Competencia> {
 		return repository.listar();
 	}
 
-	public List<Competencia> buscarPorNome(String nome, String cpf) {
-		return repository.buscar(nome, cpf);
+	public List<Competencia> buscarPorNome(String nome) {
+		return repository.buscar(nome);
 	}
 
 	public List<Competencia> listarPaginado(int first, int pageSize, Map<String, Object> filtros) {

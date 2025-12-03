@@ -18,7 +18,7 @@ public class VinculoEmpregativoRepository extends GenericRepositoryImpl<VinculoE
 		return em.createQuery("select f FROM VinculoEmpregativo f", VinculoEmpregativo.class).getResultList();
 	}
 
-	public List<VinculoEmpregativo> buscar(String nome, String cpf) {
+	public List<VinculoEmpregativo> buscar(String nome) {
 		String jpql = "SELECT p FROM VinculoEmpregativo p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {

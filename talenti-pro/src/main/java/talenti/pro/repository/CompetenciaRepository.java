@@ -20,7 +20,7 @@ public class CompetenciaRepository extends GenericRepositoryImpl<Competencia> {
 	}
 
 
-	public List<Competencia> buscar(String nome, String cpf) {
+	public List<Competencia> buscar(String nome) {
 		String jpql = "SELECT p FROM Competencia p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {

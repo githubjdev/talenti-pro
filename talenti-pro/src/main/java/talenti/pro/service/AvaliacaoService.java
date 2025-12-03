@@ -37,8 +37,8 @@ public class AvaliacaoService implements ServiceInterface<Avaliacao> {
 		return repository.listar();
 	}
 
-	public List<Avaliacao> buscarPorNome(String nome, String cpf) {
-		return repository.buscar(nome, cpf);
+	public List<Avaliacao> buscarPorNome(String nome) {
+		return repository.buscar(nome);
 	}
 
 	public List<Avaliacao> listarPaginado(int first, int pageSize, Map<String, Object> filtros) {

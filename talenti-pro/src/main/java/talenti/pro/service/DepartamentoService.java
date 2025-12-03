@@ -37,8 +37,8 @@ public class DepartamentoService implements ServiceInterface<Departamento> {
 		return repository.listar();
 	}
 
-	public List<Departamento> buscarPorNome(String nome, String cpf) {
-		return repository.buscar(nome, cpf);
+	public List<Departamento> buscarPorNome(String nome) {
+		return repository.buscar(nome);
 	}
 
 	public List<Departamento> listarPaginado(int first, int pageSize, Map<String, Object> filtros) {

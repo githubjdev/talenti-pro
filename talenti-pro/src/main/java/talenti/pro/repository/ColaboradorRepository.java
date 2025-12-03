@@ -24,10 +24,18 @@ public class ColaboradorRepository extends GenericRepositoryImpl<Colaborador> {
 		if (nome != null && !nome.trim().isEmpty()) {
 			jpql += " AND LOWER(p.nome) LIKE LOWER(:nome)";
 		}
+		
+		if (cpf != null && !cpf.trim().isEmpty()) {
+			jpql += " AND LOWER(p.cpf) LIKE LOWER(:cpf)";
+		}
 
 		var query = em.createQuery(jpql, Colaborador.class);
 		if (nome != null && !nome.trim().isEmpty()) {
 			query.setParameter("nome", "%" + nome + "%");
+		}
+		
+		if (cpf != null && !cpf.trim().isEmpty()) {
+			query.setParameter("cpf", "%" + cpf + "%");
 		}
 
 		return query.getResultList();
