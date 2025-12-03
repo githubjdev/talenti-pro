@@ -16,28 +16,26 @@
         style="width: 80%; text-align:center; font-size:16px; padding:12px;background: #c8e6c9; border: none; color:#304562" />
 </div>
 
-<h:form id="formBuscaAvaliacao">
 
-	    <p:panel header="Buscar Avaliacao" style="max-width:80%;margin:auto;"
-		     toggleable="true"
-	         collapsed="true"
-	         toggleSpeed="300">
-	        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
-	
-	            <p:outputLabel for="nomeBusca" value="Nome:" />
-	            <p:inputText id="nomeBusca" value="#{avaliacaoController.filtroNome}"
-	                         placeholder="Digite o nome da avaliação" style="width:100%" />
-	        </h:panelGrid>
-	
-	        <p:commandButton value="Pesquisar" icon="pi pi-search"
-	                         action="#{avaliacaoController.pesquisar}"
-	                         process="@form"
-	                         update="formAvaliacao:tabela msgs"
-	                         style="margin-top:10px;width:100%;" />
-	    </p:panel>
-
-	</h:form>
-
+		<h:form id="formBuscaAvaliacao">
+		
+			    <p:panel header="Buscar Avaliacao" style="max-width:80%;margin:auto;"
+			    toggleable="true" collapsed="true" toggleSpeed="300" >
+			        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
+			
+			            <p:outputLabel for="nomeBusca" value="Nome:" />
+			            <p:inputText id="nomeBusca" value="#{avaliacaoController.filtroNome}"
+			                         placeholder="Digite o nome da avaliação" style="width:100%" />
+			        </h:panelGrid>
+			
+			        <p:commandButton value="Pesquisar" icon="pi pi-search"
+			                         action="#{avaliacaoController.pesquisar}"
+			                         process="@form"
+			                         update="formAvaliacao:tabela msgs"
+			                         style="margin-top:10px;width:100%;" />
+			    </p:panel>
+		
+			</h:form>	
 	              
 	<p:separator style="margin:40px 0;"  />
 	
@@ -73,14 +71,24 @@
 					 
 					 
  				<p:outputLabel for="nomeDepart" value="Departamento:" />
- 				<p:selectOneMenu id="nomeDepart" style="width:100%" required="true"
- 				       value="#{avaliacaoController.avaliacao.departamento}"
- 				       converter="#{departamentoConverter}" 
- 				       label="Departamento"> 
- 				       
- 				       <f:selectItems value="#{avaliacaoController.departamentos}"
- 				       var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
- 				</p:selectOneMenu>	
+				<p:selectCheckboxMenu id="nomeDepart"
+				        value="#{avaliacaoController.departamentoSelecionado}"
+				        filter="true" filterMatchMode="contains"
+				        filterBy="nome"
+				        multiple="true"
+				        updateLabel="true" showSelectAll="false"
+				        required="true"
+				        style="width:100%"
+				        defaultLabel="Selecione o Departamento"
+				        panelStyle="width: 650px"
+				        scrollHeight="250">
+				
+				    <f:selectItems value="#{avaliacaoController.departamentos}"
+				                   var="g"
+				                   itemLabel="#{g.nome}"
+				                   itemValue="#{g.nome}" />
+				</p:selectCheckboxMenu>
+
  				
  				
  				<p:outputLabel for="cargo" value="Cargo:" />
@@ -131,7 +139,7 @@
 
 				<p:separator style="margin:20px 0" />
 				
-
+				
 				<p:dataTable id="tabela" value="#{avaliacaoController.avaliacaos}" 
 				    var="p"
 				    paginator="true"
@@ -140,7 +148,7 @@
 				    rowsPerPageTemplate="5,10,20,50"
 				    paginatorAlwaysVisible="true"
 				    paginatorPosition="top"
-					style="max-width:80%;margin:auto;">
+					style="max-width:80%;margin:auto;padding-top:50px">
 					<p:column headerText="ID">#{p.id}</p:column>
 					<p:column headerText="Nome">#{p.nome}</p:column>
 					<p:column headerText="Ações">

@@ -4,9 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.ToggleSelectEvent;
+import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.LazyDataModel;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -51,6 +56,8 @@ public class AvaliacaoController extends ManagedBeanController {
 	private List<Cargo> cargos;
 	private List<VinculoEmpregativo> vinculoEmpregativos;
 	private List<Competencia> competencias;
+	
+	private String[] departamentoSelecionado;
 
 	@PostConstruct
 	public void init() {
@@ -125,6 +132,42 @@ public class AvaliacaoController extends ManagedBeanController {
 	public List<Competencia> getCompetencias() {
 		return competencias;
 	}
+	
+	
+	public void setDepartamentoSelecionado(String[] departamentoSelecionado) {
+		this.departamentoSelecionado = departamentoSelecionado;
+	}
+	
+	public String[] getDepartamentoSelecionado() {
+		return departamentoSelecionado;
+	}
+	
+	
+	
+    public void onToggleSelect(ToggleSelectEvent event) {
+        FacesMessage msg = new FacesMessage();
+        msg.setSummary("Toggled: " + event.isSelected());
+        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void onItemSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage();
+        msg.setSummary("Item selected: " + event.getObject().toString());
+        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    
+    public void onItemUnselect(UnselectEvent event) {
+        FacesMessage msg = new FacesMessage();
+        msg.setSummary("Item unselected: " + event.getObject().toString());
+        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
 	@Override
 	public String getDescricaoTela() {
