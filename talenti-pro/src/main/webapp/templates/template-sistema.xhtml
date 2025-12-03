@@ -11,7 +11,8 @@
 <h:head >
 	<title>Sistema de avaliação pública pessoal</title>
 
-	<h:outputStylesheet library="css"  name="cadastro.css" id="min-css3" />
+     <h:outputScript library="js" name="script.js" />
+	 <h:outputStylesheet library="css"  name="cadastro.css" id="min-css3" />
 </h:head>
 
 <h:body>
@@ -34,7 +35,7 @@
 				</p:submenu>
 				
 				<p:submenu label="Avaliação" icon="pi pi-capsules" id="avaliacao">
-				   
+				    <p:menuitem value="Avaliação" outcome="/pages/avaliacao.xhtml" icon="pi pi-plus" />
 				</p:submenu>
 				
 				

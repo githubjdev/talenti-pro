@@ -33,7 +33,7 @@ public class Avaliacao implements Serializable {
 	@Column(nullable = false)
 	private String nome;
 
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "text")
 	private String descricao;
 
 	@Column(nullable = false)
@@ -44,10 +44,6 @@ public class Avaliacao implements Serializable {
 	private Departamento departamento;
 
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name = "competencia_id", nullable = false, foreignKey = @ForeignKey(name = "competencia_fk"))
-	private Competencia competencia;
-
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "cargo_id", nullable = false, foreignKey = @ForeignKey(name = "cargo_fk"))
 	private Cargo cargo;
 
@@ -55,6 +51,11 @@ public class Avaliacao implements Serializable {
 	@JoinColumn(name = "vinculo_empregativo_id", nullable = false, foreignKey = @ForeignKey(name = "vinculo_empregativo_fk"))
 	private VinculoEmpregativo vinculoEmpregativo;
 
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name = "competencia_id", nullable = false, foreignKey = @ForeignKey(name = "competencia_fk"))
+	private Competencia competencia;
+	
+	
 	public Long getId() {
 		return id;
 	}

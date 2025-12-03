@@ -1,0 +1,161 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-sistema.xhtml">
+
+
+<ui:define name="content">
+<h:form id="formBuscaAvaliacao">
+
+	    <p:panel header="Buscar Avaliacao" style="max-width:80%;margin:auto;">
+	        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
+	
+	            <p:outputLabel for="nomeBusca" value="Nome:" />
+	            <p:inputText id="nomeBusca" value="#{avaliacaoController.filtroNome}"
+	                         placeholder="Digite o nome da avaliação" style="width:100%" />
+	        </h:panelGrid>
+	
+	        <p:commandButton value="Pesquisar" icon="pi pi-search"
+	                         action="#{avaliacaoController.pesquisar}"
+	                         process="@form"
+	                         update="formAvaliacao:tabela msgs"
+	                         style="margin-top:10px;width:100%;" />
+	    </p:panel>
+	
+	</h:form>
+
+	<p:separator style="margin:40px 0;"  />
+
+	       <h:form id="formAvaliacao">
+				<p:panel header="Cadastro de Avaliação"
+					style="max-width:80%;margin:auto;">
+
+				<h:inputHidden id="id" value="#{avaliacaoController.avaliacao.id}" />
+ 				<h:panelGrid columns="2" style="width:100%" cellpadding="5">
+					
+					 <p:outputLabel  value="ID:" />
+					<p:inputText value="#{avaliacaoController.avaliacao.id}" style="width:100%"
+						readonly="true" />
+						
+					<p:outputLabel value="Nome:" />	
+					<p:inputText value="#{avaliacaoController.avaliacao.nome}"
+						placeholder="Nome" style="width:100%" label="Nome do avaliação"
+						required="true" />
+	
+					<p:outputLabel value="Descrição:" />	
+					<p:inputTextarea  value="#{avaliacaoController.avaliacao.descricao}"
+						placeholder="Decrição" style="width:100%" rows="5"
+						label="Descrição do avaliação"
+						required="true" />	
+						
+					<p:outputLabel value="Prazo de Realização:" />			
+					<p:datePicker value="#{avaliacaoController.avaliacao.dataPrazoRealizacao}"
+					 pattern="dd/MM/yyyy"  style="width:100%" 
+					 mask="99/99/9999" 
+					 oninput="somenteNumeros(this)" 
+					 inputmode="numeric"
+					 required="true" label="Prazo de Realização"/>	
+					 
+					 
+ 				<p:outputLabel for="nomeDepart" value="Departamento:" />
+ 				<p:selectOneMenu id="nomeDepart" style="width:100%" required="true"
+ 				       value="#{avaliacaoController.avaliacao.departamento}"
+ 				       converter="#{departamentoConverter}" 
+ 				       label="Departamento"> 
+ 				       
+ 				       <f:selectItems value="#{avaliacaoController.departamentos}"
+ 				       var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
+ 				</p:selectOneMenu>	
+ 				
+ 				
+ 				<p:outputLabel for="cargo" value="Cargo:" />
+ 				<p:selectOneMenu id="cargo" style="width:100%" required="true"
+ 				       value="#{avaliacaoController.avaliacao.cargo}"
+ 				       converter="#{cargoConverter}" label="Cargo"> 
+ 				       
+ 				       <f:selectItems value="#{avaliacaoController.cargos}"
+ 				       var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
+ 				</p:selectOneMenu>  
+ 				
+ 				<p:outputLabel for="nomeVincEmp" value="Vínculo Empregativo:" />
+ 				<p:selectOneMenu id="nomeVincEmp" style="width:100%" required="true"
+ 				       value="#{avaliacaoController.avaliacao.vinculoEmpregativo}"
+ 				       converter="#{vinculoEmpregativoConverter}" 
+ 				       label="Vínculo empregaticío"> 
+ 				       
+ 				       <f:selectItems value="#{avaliacaoController.vinculoEmpregativos}"
+ 				       var="g" itemLabel="#{g.nome}" itemValue="#{g}" />
+ 				</p:selectOneMenu>  
+ 				
+ 				<p:outputLabel for="nomeCompet" value="Compentência:" />
+ 				<p:selectOneMenu id="nomeCompet" style="width:100%" required="true"
+ 				       value="#{avaliacaoController.avaliacao.competencia}"
+ 				       converter="#{competenciaConverter}" 
+ 				       label="Compentêcia"> 
+ 				       
+ 				       <f:selectItems value="#{avaliacaoController.competencias}"
+ 				       var="g" itemLabel="#{g.nome}" itemValue="#{g}" />
+ 				</p:selectOneMenu>    				  				  								 											
+
+				</h:panelGrid>	
+				<h:panelGroup layout="block" style="display:flex; gap:10px; margin-top:10px;">
+				    <p:commandButton value="Salvar" 
+				                     action="#{avaliacaoController.salvar}"
+				                     update="formAvaliacao tabela msgs"
+				                     icon="pi pi-save"
+				                     style="flex:1;" />
+				
+				    <p:commandButton value="Novo" 
+				                     action="#{avaliacaoController.novo}"
+				                     update="formAvaliacao tabela msgs"
+				                     icon="pi pi-plus"
+				                     style="flex:1;" />
+				</h:panelGroup>
+					
+				</p:panel>
+
+				<p:separator style="margin:20px 0" />
+				
+
+				<p:dataTable id="tabela" value="#{avaliacaoController.avaliacaos}" 
+				    var="p"
+				    paginator="true"
+				    lazy="true"
+				    rows="5"
+				    rowsPerPageTemplate="5,10,20,50"
+				    paginatorAlwaysVisible="true"
+				    paginatorPosition="top"
+					style="max-width:80%;margin:auto;">
+					<p:column headerText="ID">#{p.id}</p:column>
+					<p:column headerText="Nome">#{p.nome}</p:column>
+					<p:column headerText="Ações">
+					<p:commandButton icon="pi pi-pencil"
+					    action="#{avaliacaoController.editar(p)}"
+					    update=":formAvaliacao"
+					    process="@this"
+					    immediate="true"
+					    styleClass="ui-button-warning"
+					    title="Editar"/>
+					
+					<p:commandButton icon="pi pi-trash"
+					    action="#{avaliacaoController.excluir(p)}"
+					    update="tabela :formAvaliacao msgs"
+					    process="@this"
+					    immediate="true"
+					    styleClass="ui-button-danger"
+					    title="Excluir">
+					    
+					        <p:confirm header="Confirmar" 
+				               message="Tem certeza que deseja excluir o registro?"
+				               icon="pi pi-exclamation-triangle" />
+					 </p:commandButton>
+
+					</p:column>
+				</p:dataTable>
+				
+			</h:form>
+			<p:separator style="margin:50px 0" />	
+	</ui:define>
+</ui:composition>

@@ -45,10 +45,54 @@
 				<p:inputText value="#{colaboradorController.colaborador.nome}" 
 				placeholder="Nome" style="width:100%"  required="true" label="Nome do colaborador"/>
 				
+				<p:outputLabel value="Nome:" />	
+				<p:inputText value="#{colaboradorController.colaborador.email}" 
+					placeholder="E-mail" style="width:100%"  
+					required="true" label="E-mail"
+					 id="email" onblur="validarEmailField(this)">
+				</p:inputText>		
+				
+				<p:outputLabel value="CPF:" />	
+				<p:inputText value="#{colaboradorController.colaborador.cpf}" 
+				placeholder="___.___.___-__" style="width:100%"  
+				mask="999.999.999-99"  oninput="mascaraCPF(this)"
+				inputmode="numeric"
+				required="true" label="CPF"/>				
+				
+				
+				<p:outputLabel value="Data de Nascimento:" />			
+				<p:datePicker value="#{colaboradorController.colaborador.dataNascimento}"
+				 pattern="dd/MM/yyyy"  style="width:100%" 
+				 mask="99/99/9999" 
+				 oninput="somenteNumeros(this)" 
+				 inputmode="numeric"
+				 required="true" label="Data de Nascimento"/>						
+				
 				<p:outputLabel value="Data de Admissão:" />			
 				<p:datePicker value="#{colaboradorController.colaborador.dataAdmissao}"
-				 pattern="dd/MM/yyyy"  style="width:100%" required="true" label="Data de admissão"/>
-						
+				 pattern="dd/MM/yyyy"  
+				 mask="99/99/9999" 
+				 oninput="somenteNumeros(this)" 
+				 inputmode="numeric"
+				 style="width:100%" 
+				 required="true" label="Data de admissão"/>
+
+
+ 				<p:outputLabel for="escolaridade" value="Escolaridade:" />
+ 				<p:selectOneMenu id="escolaridade" style="width:100%" required="true"
+ 				       value="#{colaboradorController.colaborador.escolaridade}"
+ 				       label="Escolaridade"> 
+ 				       
+ 				       <f:selectItem itemLabel="Ensino Básico" itemValue="ENSINO_BASICO"/>
+ 				       <f:selectItem itemLabel="Ensino Fundamental" itemValue="ENSINO_FUNDAMENTAL"/>
+ 				       <f:selectItem itemLabel="Ensino Médio" itemValue="ENSINO_MÉDIO"/>
+ 				       <f:selectItem itemLabel="Superior Completo" itemValue="SUPERIOR_COMPLETO"/>
+ 				       <f:selectItem itemLabel="Pós-Graduação" itemValue="POS_GRADUACAO"/>
+ 				       <f:selectItem itemLabel="Especialização" itemValue="ESPECIALIZACAO"/>
+ 				       <f:selectItem itemLabel="MBA" itemValue="MBA"/>
+ 				       <f:selectItem itemLabel="Mestrado" itemValue="MESTRADO"/>
+ 				       <f:selectItem itemLabel="Doutorado" itemValue="DOUTORADO"/>
+ 				</p:selectOneMenu>  						
 	                         
  				<p:outputLabel for="nomeCargo" value="Cargo:" />
  				<p:selectOneMenu id="nomeCargo" style="width:100%" required="true"
@@ -58,6 +102,16 @@
  				       <f:selectItems value="#{colaboradorController.cargos}"
  				       var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
  				</p:selectOneMenu>  
+ 				
+ 				
+ 				<p:outputLabel for="superior" value="Superior:" />
+ 				<p:selectOneMenu id="superior" style="width:100%" required="true"
+ 				       value="#{colaboradorController.colaborador.superior}"
+ 				       converter="#{cargoConverter}" label="Superior"> 
+ 				       
+ 				       <f:selectItems value="#{colaboradorController.cargos}"
+ 				       var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
+ 				</p:selectOneMenu>   				
  				
  				<p:outputLabel for="nomeDepart" value="Departamento:" />
  				<p:selectOneMenu id="nomeDepart" style="width:100%" required="true"
@@ -135,6 +189,7 @@
 					</p:column>
 				</p:dataTable>
 			</h:form>
-			<p:separator style="margin:50px 0" />	
+			<p:separator style="margin:50px 0" />
+
 	</ui:define>
 </ui:composition>
