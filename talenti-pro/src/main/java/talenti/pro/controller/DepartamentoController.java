@@ -90,5 +90,10 @@ public class DepartamentoController extends ManagedBeanController {
 	public List<Gestor> getGestors() {
 		return gestors;
 	}
+	
+	@Override
+	public String getDescricaoTela() {
+		return "Realize o gerenciamento de cadastro dos departamentos.";
+	}
 
 }

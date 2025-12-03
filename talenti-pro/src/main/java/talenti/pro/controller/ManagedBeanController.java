@@ -8,6 +8,8 @@ import jakarta.faces.context.FacesContext;
 public abstract class ManagedBeanController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	public abstract String getDescricaoTela();
 
 	public void info(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null,

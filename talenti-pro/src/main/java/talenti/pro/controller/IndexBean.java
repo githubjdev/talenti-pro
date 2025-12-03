@@ -24,5 +24,11 @@ public class IndexBean extends ManagedBeanController {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	
+	@Override
+	public String getDescricaoTela() {
+		return "Sistema avaliativo de colaboradores públicos.";
+	}
 
 }

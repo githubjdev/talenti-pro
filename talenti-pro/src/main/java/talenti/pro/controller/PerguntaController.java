@@ -93,5 +93,11 @@ public class PerguntaController extends ManagedBeanController {
 	public void setFiltroNome(String filtroNome) {
 		this.filtroNome = filtroNome;
 	}
+	
+	
+	@Override
+	public String getDescricaoTela() {
+		return "Realize o gerenciamento de cadastro das perguntas das avaliações.";
+	}
 
 }

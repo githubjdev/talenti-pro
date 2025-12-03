@@ -79,5 +79,11 @@ public class GestorController extends ManagedBeanController {
 	public void setFiltroNome(String filtroNome) {
 		this.filtroNome = filtroNome;
 	}
+	
+	
+	@Override
+	public String getDescricaoTela() {
+		return "Realize o gerenciamento de cadastro dos gestores";
+	}
 
 }

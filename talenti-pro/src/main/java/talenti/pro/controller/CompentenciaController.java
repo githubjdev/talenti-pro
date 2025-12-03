@@ -79,5 +79,10 @@ public class CompentenciaController extends ManagedBeanController {
 	public void setFiltroNome(String filtroNome) {
 		this.filtroNome = filtroNome;
 	}
+	
+	@Override
+	public String getDescricaoTela() {
+		return "Realize o gerenciamento do cadastro das competências.";
+	}
 
 }

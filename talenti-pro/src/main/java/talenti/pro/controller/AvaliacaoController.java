@@ -126,4 +126,9 @@ public class AvaliacaoController extends ManagedBeanController {
 		return competencias;
 	}
 
+	@Override
+	public String getDescricaoTela() {
+		return "Realize o gerenciamento das avaliações planejadas.";
+	}
+
 }

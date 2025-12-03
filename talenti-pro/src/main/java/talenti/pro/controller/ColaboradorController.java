@@ -115,5 +115,11 @@ public class ColaboradorController extends ManagedBeanController {
 	public List<VinculoEmpregativo> getVinculoEmpregativos() {
 		return vinculoEmpregativos;
 	}
+	
+	
+	@Override
+	public String getDescricaoTela() {
+		return "Realize o gerenciamento de cadastro dos colaboradores.";
+	}
 
 }

@@ -8,9 +8,21 @@
 
 
 <ui:define name="content">
+
+<div style="display:flex; justify-content:center; margin-bottom:15px;">
+    <p:staticMessage 
+        detail="#{departamentoController.descricaoTela}" 
+        severity="info" 
+        closable="true"
+ style="width: 80%; text-align:center; font-size:16px; padding:12px;background: #c8e6c9; border: none; color:#304562" />
+</div>
+
 <h:form id="formBuscaDepartamento">
 
-	    <p:panel header="Buscar Departamento" style="max-width:80%;margin:auto;">
+	    <p:panel header="Buscar Departamento" style="max-width:80%;margin:auto;"
+		     toggleable="true"
+	         collapsed="true"
+	         toggleSpeed="300">
 	        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
 	
 	            <p:outputLabel for="nomeBusca" value="Nome:" />
