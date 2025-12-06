@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.primefaces.model.LazyDataModel;
 
-import talenti.pro.service.ServiceInterface;
+import talenti.pro.service.cadastro.ServiceInterface;
 
 public class GenericLazyDataModel<T> extends LazyDataModel<T> {
 
