@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.cadastro.Gestor;
 import talenti.pro.repository.cadastro.GestorRepository;
 
@@ -19,11 +20,11 @@ public class GestorService implements ServiceInterface<Gestor> {
 	@Transactional
 	public Gestor salvar(Gestor gestor) {
 		if (gestor == null) {
-			throw new IllegalArgumentException("Gestor não pode ser nulo.");
+			throw new ValidacaoException("Gestor não pode ser nulo.");
 		}
 
 		if (gestor.getNome() == null || gestor.getNome().trim().isEmpty()) {
-			throw new IllegalArgumentException("Nome da Gestor é obrigatório.");
+			throw new ValidacaoException("Nome da Gestor é obrigatório.");
 		}
 		return repository.salvar(gestor);
 	}

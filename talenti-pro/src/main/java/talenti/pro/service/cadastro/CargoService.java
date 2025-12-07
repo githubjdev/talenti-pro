@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.cadastro.Cargo;
 import talenti.pro.repository.cadastro.CargoRepository;
 
@@ -19,11 +20,11 @@ public class CargoService implements ServiceInterface<Cargo> {
 	@Transactional
 	public Cargo salvar(Cargo cargo) {
 		if (cargo == null) {
-			throw new IllegalArgumentException("Cargo não pode ser nulo.");
+			throw new ValidacaoException("Cargo não pode ser nulo.");
 		}
 
 		if (cargo.getNome() == null || cargo.getNome().trim().isEmpty()) {
-			throw new IllegalArgumentException("Nome do Cargo é obrigatório.");
+			throw new ValidacaoException("Nome do Cargo é obrigatório.");
 		}
 		return repository.salvar(cargo);
 	}

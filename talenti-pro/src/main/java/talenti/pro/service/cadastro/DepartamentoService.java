@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.cadastro.Departamento;
 import talenti.pro.repository.cadastro.DepartamentoRepository;
 
@@ -19,11 +20,11 @@ public class DepartamentoService implements ServiceInterface<Departamento> {
 	@Transactional
 	public Departamento salvar(Departamento departamento) {
 		if (departamento == null) {
-			throw new IllegalArgumentException("Departamento não pode ser nulo.");
+			throw new ValidacaoException("Departamento não pode ser nulo.");
 		}
 
 		if (departamento.getNome() == null || departamento.getNome().trim().isEmpty()) {
-			throw new IllegalArgumentException("Nome da Departamento é obrigatório.");
+			throw new ValidacaoException("Nome da Departamento é obrigatório.");
 		}
 		return repository.salvar(departamento);
 	}

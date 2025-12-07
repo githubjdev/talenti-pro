@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.cadastro.Pergunta;
 import talenti.pro.repository.cadastro.PerguntaRepository;
 
@@ -19,11 +20,11 @@ public class PerguntaService implements ServiceInterface<Pergunta> {
 	@Transactional
 	public Pergunta salvar(Pergunta pergunta) {
 		if (pergunta == null) {
-			throw new IllegalArgumentException("Pergunta não pode ser nulo.");
+			throw new ValidacaoException("Pergunta não pode ser nulo.");
 		}
 
 		if (pergunta.getDescricao() == null || pergunta.getDescricao().trim().isEmpty()) {
-			throw new IllegalArgumentException("Descrição do Pergunta é obrigatório.");
+			throw new ValidacaoException("Descrição do Pergunta é obrigatório.");
 		}
 		return repository.salvar(pergunta);
 	}

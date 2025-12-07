@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.cadastro.VinculoEmpregativo;
 import talenti.pro.repository.cadastro.VinculoEmpregativoRepository;
 
@@ -19,11 +20,11 @@ public class VinculoEmpregativoService implements ServiceInterface<VinculoEmpreg
 	@Transactional
 	public VinculoEmpregativo salvar(VinculoEmpregativo vinculo_empregativo) {
 		if (vinculo_empregativo == null) {
-			throw new IllegalArgumentException("VinculoEmpregativo não pode ser nulo.");
+			throw new ValidacaoException("VinculoEmpregativo não pode ser nulo.");
 		}
 
 		if (vinculo_empregativo.getNome() == null || vinculo_empregativo.getNome().trim().isEmpty()) {
-			throw new IllegalArgumentException("Nome do VinculoEmpregativo é obrigatório.");
+			throw new ValidacaoException("Nome do VinculoEmpregativo é obrigatório.");
 		}
 		return repository.salvar(vinculo_empregativo);
 	}

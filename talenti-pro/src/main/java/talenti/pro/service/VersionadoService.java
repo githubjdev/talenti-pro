@@ -6,7 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.Scanner;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.ejb.Singleton;
+import jakarta.ejb.Startup;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
 import jakarta.transaction.Transactional;
@@ -16,7 +17,8 @@ import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.VersionadorBanco;
 import talenti.pro.repository.VersionadorBancoRepository;
 
-@RequestScoped
+@Singleton
+@Startup
 public class VersionadoService implements Serializable {
 
 	private static final long serialVersionUID = 1L;

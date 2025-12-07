@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.cadastro.Colaborador;
 import talenti.pro.repository.cadastro.ColaboradorRepository;
 
@@ -19,11 +20,11 @@ public class ColaboradorService implements ServiceInterface<Colaborador> {
 	@Transactional
 	public Colaborador salvar(Colaborador colaborador) {
 		if (colaborador == null) {
-			throw new IllegalArgumentException("Colaborador não pode ser nulo.");
+			throw new ValidacaoException("Colaborador não pode ser nulo.");
 		}
 
 		if (colaborador.getNome() == null || colaborador.getNome().trim().isEmpty()) {
-			throw new IllegalArgumentException("Nome do Colaborador é obrigatório.");
+			throw new ValidacaoException("Nome do Colaborador é obrigatório.");
 		}
 		return repository.salvar(colaborador);
 	}

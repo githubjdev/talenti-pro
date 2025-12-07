@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.avaliacao.Avaliacao;
 import talenti.pro.repository.avaliacao.AvaliacaoRepository;
 import talenti.pro.service.cadastro.ServiceInterface;
@@ -20,11 +21,11 @@ public class AvaliacaoService implements ServiceInterface<Avaliacao> {
 	@Transactional
 	public Avaliacao salvar(Avaliacao avaliacao) {
 		if (avaliacao == null) {
-			throw new IllegalArgumentException("Avaliacao não pode ser nulo.");
+			throw new ValidacaoException("Avaliacao não pode ser nulo.");
 		}
 
 		if (avaliacao.getNome() == null || avaliacao.getNome().trim().isEmpty()) {
-			throw new IllegalArgumentException("Nome do Avaliação é obrigatório.");
+			throw new ValidacaoException("Nome do Avaliação é obrigatório.");
 		}
 		return repository.salvar(avaliacao);
 	}

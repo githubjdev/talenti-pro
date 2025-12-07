@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.cadastro.Competencia;
 import talenti.pro.repository.cadastro.CompetenciaRepository;
 
@@ -19,11 +20,11 @@ public class CompetenciaService implements ServiceInterface<Competencia> {
 	@Transactional
 	public Competencia salvar(Competencia competencia) {
 		if (competencia == null) {
-			throw new IllegalArgumentException("Competencia não pode ser nulo.");
+			throw new ValidacaoException("Competencia não pode ser nulo.");
 		}
 
 		if (competencia.getNome() == null || competencia.getNome().trim().isEmpty()) {
-			throw new IllegalArgumentException("Nome da Competencia é obrigatório.");
+			throw new ValidacaoException("Nome da Competencia é obrigatório.");
 		}
 		return repository.salvar(competencia);
 	}
