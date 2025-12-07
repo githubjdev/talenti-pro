@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -14,9 +13,6 @@ import jakarta.persistence.Version;
 public abstract class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	Long id;
 
 	@Column(name = "ativo", nullable = false)
 	private Boolean ativo = true;
@@ -35,14 +31,6 @@ public abstract class BaseEntity implements Serializable {
 
 	@Version
 	private Long versao;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Boolean getAtivo() {
 		return ativo;

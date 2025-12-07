@@ -20,7 +20,7 @@ public class VersionadorBancoRepository extends GenericRepositoryImpl<Versionado
 	public boolean arquivoJaRodado(String file) {
 		return (Boolean) em
 				.createNativeQuery(
-						"select count(1) > 0 as rodado from versionador_banco where arquivo_sql = '" + file + "'")
+						"select count(1) > 0 as rodado from versionador_banco where arquivosql = '" + file + "'")
 				.getSingleResult();
 	}
 

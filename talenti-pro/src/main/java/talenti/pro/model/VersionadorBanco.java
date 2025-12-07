@@ -19,7 +19,8 @@ public class VersionadorBanco extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_versionador_banco")
 	private Long id;
 
-	@Column(nullable = false)
+	
+	@Column(nullable = false, name = "arquivosql")
 	private String arquivoSql;
 
 	public void setArquivoSql(String arquivoSql) {
@@ -33,6 +34,10 @@ public class VersionadorBanco extends BaseEntity {
 	public VersionadorBanco(String arquivoSql) {
 		super();
 		this.arquivoSql = arquivoSql;
+	}
+	
+	
+	public VersionadorBanco() {
 	}
 
 }

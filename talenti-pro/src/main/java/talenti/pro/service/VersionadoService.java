@@ -9,6 +9,8 @@ import java.util.Scanner;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
+import jakarta.transaction.Transactional;
+import jakarta.transaction.Transactional.TxType;
 import talenti.pro.exceptionhandler.ExceptionTalentiPro;
 import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.VersionadorBanco;
@@ -22,10 +24,12 @@ public class VersionadoService implements Serializable {
 	@Inject
 	private VersionadorBancoRepository repository;
 
+	@Transactional(TxType.REQUIRED)
 	public void processarSQL(ServletContext servletContext) throws ExceptionTalentiPro, FileNotFoundException {
 
 		if (!repository.existeTabela()) {
-			throw new ValidacaoException("Tabela versionadorbanco não existe no banco de dados, tabela deve ser criada.");
+			throw new ValidacaoException(
+					"Tabela versionadorbanco não existe no banco de dados, tabela deve ser criada.");
 		}
 
 		String caminhoPastaSQL = servletContext.getRealPath("db_sql_versionamento") + File.separator;
@@ -51,6 +55,17 @@ public class VersionadoService implements Serializable {
 			}
 		}
 
+	}
+
+	@Transactional(TxType.REQUIRED)
+	public boolean existeTabela() {
+		return repository.existeTabela();
+
+	}
+
+	@Transactional(TxType.REQUIRED)
+	public boolean arquivoJaRodado(String file) {
+		return repository.arquivoJaRodado(file);
 	}
 
 }
