@@ -26,7 +26,7 @@ public class LoginController extends ManagedBeanController {
 
 	        } catch (Exception e) {
 	        	  e.printStackTrace();
-	           erro("Login inválido");
+	            erro("Login inválido");
 	            return null;
 	        }
 	    }
