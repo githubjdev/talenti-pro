@@ -16,11 +16,11 @@ public class DepartamentoRepository extends GenericRepositoryImpl<Departamento> 
 	}
 
 	public List<Departamento> listar() {
-		return em.createQuery("select d FROM Departamento d", Departamento.class).getResultList();
+		return em.createQuery("select d FROM "+getEntityName()+" d", Departamento.class).getResultList();
 	}
 
 	public List<Departamento> buscar(String nome) {
-		String jpql = "SELECT p FROM Departamento p WHERE 1=1";
+		String jpql = "SELECT p FROM "+getEntityName()+" p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {
 			jpql += " AND LOWER(p.nome) LIKE LOWER(:nome)";
@@ -36,7 +36,7 @@ public class DepartamentoRepository extends GenericRepositoryImpl<Departamento> 
 
 	@Override
 	public List<Departamento> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM Departamento WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT * FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
@@ -68,7 +68,7 @@ public class DepartamentoRepository extends GenericRepositoryImpl<Departamento> 
 
 	@Override
 	public Long contar(Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM departamento WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null

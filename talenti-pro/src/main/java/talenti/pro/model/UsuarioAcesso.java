@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(name = "usuario_acesso")
+@Table(name = "aut_usuario_acesso")
 @SequenceGenerator(name = "seq_usuario_acesso", sequenceName = "seq_usuario_acesso", allocationSize = 1, initialValue = 1)
 public class UsuarioAcesso implements Serializable {
 

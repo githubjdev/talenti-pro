@@ -11,17 +11,21 @@ public class VersionadorBancoRepository extends GenericRepositoryImpl<Versionado
 	}
 
 	public boolean existeTabela() {
-		return (boolean) em.createNativeQuery(
-				"SELECT EXISTS ( SELECT 1 FROM information_schema.tables WHERE table_name = 'versionador_banco' )")
-				.getSingleResult();
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT EXISTS ( SELECT 1 FROM information_schema.tables WHERE table_name = '"+getTableName()+"' )");
+		
+		return (boolean) em.createNativeQuery(sql.toString()).getSingleResult();
 
 	}
 
 	public boolean arquivoJaRodado(String file) {
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("select count(1) > 0 as rodado from "+getTableName()+" where arquivosql = '" + file + "'");
+		
 		return (Boolean) em
-				.createNativeQuery(
-						"select count(1) > 0 as rodado from versionador_banco where arquivosql = '" + file + "'")
-				.getSingleResult();
+				.createNativeQuery(sql.toString()).getSingleResult();
 	}
 
 }

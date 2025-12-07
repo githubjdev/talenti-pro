@@ -24,7 +24,7 @@ import talenti.pro.model.cadastro.VinculoEmpregativo;
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(name = "avaliacao")
+@Table(name = "aval_avaliacao")
 @SequenceGenerator(name = "seq_avaliacao", sequenceName = "seq_avaliacao", allocationSize = 1, initialValue = 1)
 public class Avaliacao implements Serializable {
 

@@ -22,7 +22,7 @@ public class CargoRepository extends GenericRepositoryImpl<Cargo> {
 	}
 
 	public List<Cargo> buscar(String nome) {
-		String jpql = "SELECT p FROM Cargo p WHERE 1=1";
+		String jpql = "SELECT p FROM "+getEntityName()+" p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {
 			jpql += " AND LOWER(p.nome) LIKE LOWER(:nome)";
@@ -38,7 +38,7 @@ public class CargoRepository extends GenericRepositoryImpl<Cargo> {
 
 	@Override
 	public List<Cargo> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM Cargo WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT * FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
@@ -70,7 +70,7 @@ public class CargoRepository extends GenericRepositoryImpl<Cargo> {
 
 	@Override
 	public Long contar(Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM cargo WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null

@@ -16,12 +16,12 @@ public class PerguntaRepository extends GenericRepositoryImpl<Pergunta> {
 	}
 
 	public List<Pergunta> listar() {
-		return em.createQuery("select f FROM Pergunta f", Pergunta.class).getResultList();
+		return em.createQuery("select f FROM "+getEntityName()+" f", Pergunta.class).getResultList();
 	}
 
 	@Override
 	public List<Pergunta> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM Pergunta WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT * FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("descricao") && filters.get("descricao") != null
@@ -53,7 +53,7 @@ public class PerguntaRepository extends GenericRepositoryImpl<Pergunta> {
 
 	@Override
 	public Long contar(Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM pergunta WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("descricao") && filters.get("descricao") != null

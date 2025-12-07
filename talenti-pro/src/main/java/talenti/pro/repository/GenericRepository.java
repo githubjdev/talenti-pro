@@ -20,5 +20,9 @@ public interface GenericRepository<T extends Serializable> {
 	Optional<T> buscarPorIdOpt(Long id);
 
 	int executeUpdateNativeSQL(String sql);
+	
+	String getTableName();
+	
+	String getEntityName();
 
 }

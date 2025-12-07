@@ -17,12 +17,12 @@ public class CompetenciaRepository extends GenericRepositoryImpl<Competencia> {
 	}
 
 	public List<Competencia> listar() {
-		return em.createQuery("select c FROM Competencia c", Competencia.class).getResultList();
+		return em.createQuery("select c FROM "+getEntityName()+" c", Competencia.class).getResultList();
 	}
 
 
 	public List<Competencia> buscar(String nome) {
-		String jpql = "SELECT p FROM Competencia p WHERE 1=1";
+		String jpql = "SELECT p FROM "+getEntityName()+" p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {
 			jpql += " AND LOWER(p.nome) LIKE LOWER(:nome)";
@@ -38,7 +38,7 @@ public class CompetenciaRepository extends GenericRepositoryImpl<Competencia> {
 
 	@Override
 	public List<Competencia> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM competencia WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT * FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
@@ -70,7 +70,7 @@ public class CompetenciaRepository extends GenericRepositoryImpl<Competencia> {
 
 	@Override
 	public Long contar(Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM competencia WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null

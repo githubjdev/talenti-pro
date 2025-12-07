@@ -16,11 +16,11 @@ public class ColaboradorRepository extends GenericRepositoryImpl<Colaborador> {
 	}
 
 	public List<Colaborador> listar() {
-		return em.createQuery("select f FROM Colaborador f", Colaborador.class).getResultList();
+		return em.createQuery("select f FROM "+getEntityName()+" f", Colaborador.class).getResultList();
 	}
 
 	public List<Colaborador> buscar(String nome, String cpf) {
-		String jpql = "SELECT p FROM Colaborador p WHERE 1=1";
+		String jpql = "SELECT p FROM "+getEntityName()+" p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {
 			jpql += " AND LOWER(p.nome) LIKE LOWER(:nome)";
@@ -44,7 +44,7 @@ public class ColaboradorRepository extends GenericRepositoryImpl<Colaborador> {
 
 	@Override
 	public List<Colaborador> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM Colaborador WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT * FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
@@ -76,7 +76,7 @@ public class ColaboradorRepository extends GenericRepositoryImpl<Colaborador> {
 
 	@Override
 	public Long contar(Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM colaborador WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null

@@ -16,11 +16,11 @@ public class GestorRepository extends GenericRepositoryImpl<Gestor> {
 	}
 
 	public List<Gestor> listar() {
-		return em.createQuery("select f FROM Gestor f", Gestor.class).getResultList();
+		return em.createQuery("select f FROM "+getEntityName()+" f", Gestor.class).getResultList();
 	}
 
 	public List<Gestor> buscar(String nome) {
-		String jpql = "SELECT p FROM Gestor p WHERE 1=1";
+		String jpql = "SELECT p FROM "+getEntityName()+" p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {
 			jpql += " AND LOWER(p.nome) LIKE LOWER(:nome)";
@@ -36,7 +36,7 @@ public class GestorRepository extends GenericRepositoryImpl<Gestor> {
 
 	@Override
 	public List<Gestor> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM Gestor WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT * FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
@@ -68,7 +68,7 @@ public class GestorRepository extends GenericRepositoryImpl<Gestor> {
 
 	@Override
 	public Long contar(Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM gestor WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null

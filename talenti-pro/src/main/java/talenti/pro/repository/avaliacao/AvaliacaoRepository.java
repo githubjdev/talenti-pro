@@ -17,7 +17,7 @@ public class AvaliacaoRepository extends GenericRepositoryImpl<Avaliacao> {
 	
 
 	public List<Avaliacao> listar() {
-		return em.createQuery("select f FROM Avaliacao f", Avaliacao.class).getResultList();
+		return em.createQuery("select f FROM "+getEntityName()+" f", Avaliacao.class).getResultList();
 	}
 
 	public List<Avaliacao> buscar(String nome) {
@@ -37,7 +37,7 @@ public class AvaliacaoRepository extends GenericRepositoryImpl<Avaliacao> {
 
 	@Override
 	public List<Avaliacao> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM Avaliacao WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT * FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
@@ -69,7 +69,7 @@ public class AvaliacaoRepository extends GenericRepositoryImpl<Avaliacao> {
 
 	@Override
 	public Long contar(Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM avaliacao WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null

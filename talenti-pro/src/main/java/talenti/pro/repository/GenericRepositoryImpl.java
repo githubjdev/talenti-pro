@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceUnitUtil;
 import jakarta.persistence.Query;
+import jakarta.persistence.Table;
 
 public abstract class GenericRepositoryImpl<T extends Serializable> implements GenericRepository<T> {
 
@@ -115,6 +117,29 @@ public abstract class GenericRepositoryImpl<T extends Serializable> implements G
 		return em.createNativeQuery(sql).executeUpdate();
 	}
 	
+	
+	@Override
+	public String getTableName() {
+		Table table = clazz.getAnnotation(Table.class);
+
+		if (table != null && table.name() != null && !table.name().isEmpty()) {
+			return table.name();
+		}
+
+		return clazz.getSimpleName().toLowerCase();
+	}
+
+	@Override
+	public String getEntityName() {
+
+		Entity entity = clazz.getAnnotation(Entity.class);
+		if (entity != null && entity.name() != null && !entity.name().isEmpty()) {
+			return entity.name();
+		}
+
+		return clazz.getSimpleName();
+
+	}
 	
 	
 }

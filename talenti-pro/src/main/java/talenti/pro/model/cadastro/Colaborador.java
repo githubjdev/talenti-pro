@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(name = "colaborador")
+@Table(name = "cad_colaborador")
 @SequenceGenerator(name = "seq_colaborador", sequenceName = "seq_colaborador", allocationSize = 1, initialValue = 1)
 public class Colaborador implements Serializable {
 

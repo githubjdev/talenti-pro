@@ -9,7 +9,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "versionador_banco")
+@Table(name = "ver_versionador_banco")
 @SequenceGenerator(name = "seq_versionador_banco", sequenceName = "seq_versionador_banco", allocationSize = 1, initialValue = 1)
 public class VersionadorBanco extends BaseEntity {
 

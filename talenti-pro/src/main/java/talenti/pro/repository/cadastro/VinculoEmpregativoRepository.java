@@ -16,11 +16,11 @@ public class VinculoEmpregativoRepository extends GenericRepositoryImpl<VinculoE
 	}
 
 	public List<VinculoEmpregativo> listar() {
-		return em.createQuery("select f FROM VinculoEmpregativo f", VinculoEmpregativo.class).getResultList();
+		return em.createQuery("select f FROM "+getEntityName()+" f", VinculoEmpregativo.class).getResultList();
 	}
 
 	public List<VinculoEmpregativo> buscar(String nome) {
-		String jpql = "SELECT p FROM VinculoEmpregativo p WHERE 1=1";
+		String jpql = "SELECT p FROM "+getEntityName()+" p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {
 			jpql += " AND LOWER(p.nome) LIKE LOWER(:nome)";
@@ -36,7 +36,7 @@ public class VinculoEmpregativoRepository extends GenericRepositoryImpl<VinculoE
 
 	@Override
 	public List<VinculoEmpregativo> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT * FROM vinculo_empregativo WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT * FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
@@ -68,7 +68,7 @@ public class VinculoEmpregativoRepository extends GenericRepositoryImpl<VinculoE
 
 	@Override
 	public Long contar(Map<String, Object> filters) {
-		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM vinculo_empregativo WHERE 1=1");
+		StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null

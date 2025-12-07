@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(name = "vinculo_empregativo")
+@Table(name = "cad_vinculo_empregativo")
 @SequenceGenerator(name = "seq_vinculo_empregativo", sequenceName = "seq_vinculo_empregativo", allocationSize = 1, initialValue = 1)
 public class VinculoEmpregativo implements Serializable {
 

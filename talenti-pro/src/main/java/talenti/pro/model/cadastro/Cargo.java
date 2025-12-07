@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(name = "cargo")
+@Table(name = "cad_cargo")
 @SequenceGenerator(name = "seq_cargo", sequenceName = "seq_cargo", allocationSize = 1, initialValue = 1)
 public class Cargo implements Serializable {
 
