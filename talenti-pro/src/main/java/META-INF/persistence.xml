@@ -7,7 +7,7 @@
 
     <persistence-unit name="talenti-pro-pu" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-         <jta-data-source>java:/jdbc/talentiDS</jta-data-source>
+         <jta-data-source>java:jboss/datasources/talentiDS</jta-data-source>
 
         <properties>
          
