@@ -6,35 +6,31 @@
 
 <h:head>
     <title>Sistema de avaliação pública pessoal</title>
+     <h:outputScript library="js" name="script.js" />
+	 <h:outputStylesheet library="css"  name="cadastro.css" id="min-css3" />   
 </h:head>
 
 <h:body>
 
-    <p:growl id="msgs" showDetail="true" autoUpdate="true" />
+    <p:growl id="msgs" showDetail="true" showSummary="false" autoUpdate="true" />
 
     <h:form>
-
-    <p:messages id="msgs" autoUpdate="true"/>
-
-    <p:panel header="Login - Talenti PRO">
-        <h:panelGrid columns="2" cellpadding="5">
-
-            <p:outputLabel value="Login:"/>
-            <p:inputText value="#{loginController.login}" required="true"/>
-
-            <p:outputLabel value="Senha:"/>
-            <p:password value="#{loginController.senha}" required="true"/>
-        </h:panelGrid>
-
-        <p:commandButton
-                value="Entrar"
-                action="#{loginController.doLogin}"
-                update="msgs"/>
-    </p:panel>
+		    <p:panel header="Login - Talenti PRO" styleClass="login-container ">
+		        <h:panelGrid columns="2" cellpadding="5">
+		
+		            <p:outputLabel value="Login:"/>
+		            <p:inputText value="#{loginController.login}" required="true" label="Login"/>
+		
+		            <p:outputLabel value="Senha:"/>
+		            <p:password value="#{loginController.senha}" required="true" label="Senha"/>
+		        </h:panelGrid>
+		
+		        <p:commandButton
+		                value="Entrar"
+		                action="#{loginController.doLogin}"
+		                update="msgs"/>
+		    </p:panel>
 
 </h:form>
-
-
-
 </h:body>
 </html>
