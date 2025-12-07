@@ -108,4 +108,13 @@ public abstract class GenericRepositoryImpl<T extends Serializable> implements G
 			PersistenceUnitUtil util = em.getEntityManagerFactory().getPersistenceUnitUtil();
 			return util.getIdentifier(entidade);
 	}
+	
+	
+	@Override
+	public int executeUpdateNativeSQL(String sql) {
+		return em.createNativeQuery(sql).executeUpdate();
+	}
+	
+	
+	
 }

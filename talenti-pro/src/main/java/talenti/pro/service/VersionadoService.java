@@ -2,50 +2,38 @@ package talenti.pro.service;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.Scanner;
 
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
+import talenti.pro.exceptionhandler.ExceptionTalentiPro;
+import talenti.pro.exceptionhandler.ValidacaoException;
+import talenti.pro.model.VersionadorBanco;
+import talenti.pro.repository.VersionadorBancoRepository;
 
 @RequestScoped
 public class VersionadoService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@PersistenceContext
-	protected EntityManager em;
+	@Inject
+	private VersionadorBancoRepository repository;
 
-	public void processarSQL(ServletContext servletContext) throws Exception {
+	public void processarSQL(ServletContext servletContext) throws ExceptionTalentiPro, FileNotFoundException {
+
+		if (!repository.existeTabela()) {
+			throw new ValidacaoException("Tabela versionadorbanco não existe no banco de dados, tabela deve ser criada.");
+		}
 
 		String caminhoPastaSQL = servletContext.getRealPath("db_sql_versionamento") + File.separator;
-
 		File[] filesSql = new File(caminhoPastaSQL).listFiles();
-
-		Boolean existeTabela = (Boolean) em.createNativeQuery(
-				"SELECT EXISTS ( SELECT 1 FROM information_schema.tables WHERE table_name = 'versionadorbanco' )")
-				.getSingleResult();
-
-		if (!existeTabela) {
-			throw new Exception("Tabela versionadorbanco não existe no banco de dados, tabela deve ser criada.");
-		}
 
 		for (File file : filesSql) {
 
-			boolean arquivoJaRodado = false;
-
-			if (!file.getName().equalsIgnoreCase("V1_INIT.sql")) {
-
-				arquivoJaRodado = (Boolean) em
-						.createNativeQuery("select count(1) > 0 as rodado from versionadorbanco where arquivo_sql = '"
-								+ file.getName() + "'")
-						.getSingleResult();
-
-			}
-
-			if (!arquivoJaRodado) {
+			if (!repository.arquivoJaRodado(file.getName())) {
 
 				FileInputStream entradaArquivo = new FileInputStream(file);
 				Scanner lerArquivo = new Scanner(entradaArquivo, "UTF-8");
@@ -55,10 +43,9 @@ public class VersionadoService implements Serializable {
 					sql.append(lerArquivo.nextLine());
 					sql.append("\n");
 				}
-				
-				em.createNativeQuery(sql.toString()).executeUpdate();
 
-				em.createNativeQuery("INSERT INTO versionadorbanco(arquivo_sql) VALUES ('" + file.getName() + "')").executeUpdate();
+				repository.executeUpdateNativeSQL(sql.toString());
+				repository.salvar(new VersionadorBanco(file.getName()));
 
 				lerArquivo.close();
 			}

@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
+import talenti.pro.exceptionhandler.ErroInternoException;
 import talenti.pro.service.VersionadoService;
 
 @WebFilter("/*")
@@ -23,8 +24,8 @@ public class WebFilterProjeto implements Filter {
 
 		try {
 			versionadoService.processarSQL(filterConfig.getServletContext());
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Throwable e) {
+			throw new ErroInternoException("Erro ao processar SQL de versionamento", e);
 		}
 	}
 

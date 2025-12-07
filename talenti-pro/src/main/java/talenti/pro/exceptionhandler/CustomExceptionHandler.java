@@ -68,7 +68,12 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 				if (t instanceof ViewExpiredException) {
 					NavigationHandler nav = fc.getApplication().getNavigationHandler();
 					nav.handleNavigation(fc, null, "/pages/erro.xhtml?faces-redirect=true");
-				} else {
+				}else if (t instanceof ExceptionTalentiPro ) {
+					 FacesContext.getCurrentInstance()
+	                    .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Msg:", amigavel));
+					 i.remove();
+					 return;
+				}else {
 					// Guardar no Flash
 					ec.getFlash().put("msgErro", amigavel);
 					ec.getFlash().setKeepMessages(true); // mantém mensagens após redirect
