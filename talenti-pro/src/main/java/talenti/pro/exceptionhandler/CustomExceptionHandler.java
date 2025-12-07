@@ -71,8 +71,8 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 				}else if (t instanceof ExceptionTalentiPro ) {
 					 FacesContext.getCurrentInstance()
 	                    .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Msg:", amigavel));
-					 i.remove();
-					 return;
+					// i.remove();
+					// return;
 				}else {
 					// Guardar no Flash
 					ec.getFlash().put("msgErro", amigavel);
