@@ -5,6 +5,52 @@
 	version="6.0">
 
 	<display-name>Talenti PRO</display-name>
+	
+	
+	<!-- ***** LOGIN CUSTOMIZADO ***** -->
+	<login-config>
+	    <auth-method>FORM</auth-method>
+	    <realm-name>TalentiRealm</realm-name>
+	
+	    <form-login-config>
+	        <form-login-page>/login.xhtml</form-login-page>
+	        <form-error-page>/login.xhtml?erro=true</form-error-page>
+	    </form-login-config>
+	</login-config>
+	
+	
+		<!-- ***** PÁGINAS PÚBLICAS ***** -->
+	<security-constraint>
+	    <web-resource-collection>
+	        <web-resource-name>Páginas Públicas</web-resource-name>
+	        <url-pattern>/login.xhtml</url-pattern>
+	        <url-pattern>/public/*</url-pattern>
+	        <url-pattern>/templates/*</url-pattern>
+	        <url-pattern>/resources/*</url-pattern>
+	        <url-pattern>/javax.faces.resource/*</url-pattern>
+	    </web-resource-collection>
+	    <!-- Sem <auth-constraint>, esta área é pública -->
+	</security-constraint>
+	
+	
+	<security-constraint>
+	    <web-resource-collection>
+	        <web-resource-name>Area Protegida</web-resource-name>
+	        <url-pattern>/pages/*</url-pattern>
+	    </web-resource-collection>
+	    <auth-constraint>
+	        <role-name>ROLE_ADMIN</role-name>
+	        <role-name>ROLE_USER</role-name>
+	    </auth-constraint>
+	</security-constraint>
+
+	<!-- ***** DECLARAÇÃO DE ROLES ***** -->
+	<security-role>
+	    <role-name>ROLE_ADMIN</role-name>
+	</security-role>
+	<security-role>
+	    <role-name>ROLE_USER</role-name>
+	</security-role>	
 
 	<welcome-file-list>
 		<welcome-file>pages/index.xhtml</welcome-file>

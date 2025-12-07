@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wildfly-web xmlns="urn:jboss:domain:undertow:13.0">
+    <security-domain>talenti-app</security-domain>
+</wildfly-web>
