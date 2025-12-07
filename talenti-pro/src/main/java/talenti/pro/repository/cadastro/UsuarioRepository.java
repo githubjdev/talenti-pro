@@ -5,30 +5,30 @@ import java.util.Map;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.persistence.Query;
-import talenti.pro.model.cadastro.Cargo;
+import talenti.pro.model.Usuario;
 import talenti.pro.repository.GenericRepositoryImpl;
 
 @Dependent
-public class CargoRepository extends GenericRepositoryImpl<Cargo> {
+public class UsuarioRepository extends GenericRepositoryImpl<Usuario> {
 
-	public CargoRepository() {
-		super(Cargo.class);
+	public UsuarioRepository() {
+		super(Usuario.class);
 	}
 	
 	
 
-	public List<Cargo> listar() {
-		return em.createQuery("select f FROM "+getTableName()+" f", Cargo.class).getResultList();
+	public List<Usuario> listar() {
+		return em.createQuery("select f FROM "+getTableName()+" f", Usuario.class).getResultList();
 	}
 
-	public List<Cargo> buscar(String nome) {
+	public List<Usuario> buscar(String nome) {
 		String jpql = "SELECT p FROM "+getEntityName()+" p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {
 			jpql += " AND LOWER(p.nome) LIKE LOWER(:nome)";
 		}
 
-		var query = em.createQuery(jpql, Cargo.class);
+		var query = em.createQuery(jpql, Usuario.class);
 		if (nome != null && !nome.trim().isEmpty()) {
 			query.setParameter("nome", "%" + nome + "%");
 		}
@@ -37,7 +37,7 @@ public class CargoRepository extends GenericRepositoryImpl<Cargo> {
 	}
 
 	@Override
-	public List<Cargo> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
+	public List<Usuario> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
@@ -52,7 +52,7 @@ public class CargoRepository extends GenericRepositoryImpl<Cargo> {
 
 		sql.append(" LIMIT :limit OFFSET :offset");
 
-		Query query = em.createNativeQuery(sql.toString(), Cargo.class);
+		Query query = em.createNativeQuery(sql.toString(), Usuario.class);
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null
