@@ -8,27 +8,81 @@
     <title>Sistema de avaliação pública pessoal</title>
      <h:outputScript library="js" name="script.js" />
 	 <h:outputStylesheet library="css"  name="cadastro.css" id="min-css3" />   
+	 
+	 
+<style>
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #3e5678 30%, #2f415d 60%, #1f2b3d 90%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Marca d'água TALENTI PRO */
+body::before {
+    content: "Talenti PRO";
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    text-align: center;
+    font-size: 8rem;          /* aumenta/diminui se quiser */
+    font-weight: 700;
+    letter-spacing: 0.5rem;
+    color: rgba(255, 255, 255, 0.04); /* bem fraquinho, estilo marca d'água */
+    transform: rotate(-25deg);
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+.talenti-bg {
+    position: relative;
+    background: linear-gradient(135deg, #3e5678 0%, #2f415d 50%, #1f2b3d 100%);
+    overflow: hidden;
+}
+
+.talenti-bg::before {
+    content: "Talenti PRO";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    text-align: center;
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 0.5rem;
+    color: rgba(255, 255, 255, 0.04);
+    transform: rotate(-0deg);
+    pointer-events: none;
+    padding-top:5%;
+    z-index: 0;
+}
+
+   
+</style>	 
 </h:head>
 
-<h:body>
+<h:body styleClass="talenti-bg">
 
     <p:growl id="msgs" showDetail="true" showSummary="false" autoUpdate="true" />
 
     <h:form>
 		    <p:panel header="Login - Talenti PRO" styleClass="login-container ">
-		        <h:panelGrid columns="2" cellpadding="5">
+		        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
 		
 		            <p:outputLabel value="Login:"/>
-		            <p:inputText value="#{loginController.login}" required="true" label="Login"/>
+		            <p:inputText value="#{loginController.login}" style="width:100%"
+		            required="true" label="Login"/>
 		
 		            <p:outputLabel value="Senha:"/>
-		            <p:password value="#{loginController.senha}" required="true" label="Senha"/>
+		            <p:password value="#{loginController.senha}" style="width:100%"
+		            required="true" label="Senha"/>
 		        </h:panelGrid>
 		
-		        <p:commandButton
-		                value="Entrar"
+		        <p:commandButton value="REALIZAR ACESSO"
 		                action="#{loginController.doLogin}"
-		                update="msgs"/>
+		                update="msgs"
+		                style="width:100%"/>
 		    </p:panel>
 
 </h:form>

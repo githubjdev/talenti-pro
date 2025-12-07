@@ -19,6 +19,10 @@ public abstract class ManagedBeanController implements Serializable {
 	protected HttpServletRequest getRequest() {
 		return (HttpServletRequest) getFacesContext().getExternalContext().getRequest();
 	}
+	
+	protected String contextPath() {
+		return getRequest().getContextPath();
+	}
 
 	public void info(String msg) {
 		FacesContext.getCurrentInstance().addMessage(null,
