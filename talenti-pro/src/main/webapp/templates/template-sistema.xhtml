@@ -21,6 +21,7 @@
 		           <h:graphicImage library="img" name="logoheader.png" style="height:80px; width: 100%" />
 		</div>
 		<div class="header" id="header">
+		  <h:form id="formMenu">
 			<p:menubar style="background:#1976d2;color:white;border:none;">
 				<p:submenu label="Cadastro" icon="pi pi-capsules" id="cadastro">
 
@@ -49,10 +50,15 @@
 				</p:submenu>		
 				
 				<p:submenu label="Conta" icon="pi pi-capsules" id="conta">
-				   
+				    <p:menuitem value="Sair"
+				            icon="pi pi-sign-out"
+				            action="#{loginController.logout}"
+				            ajax="false" />
+				    
 				</p:submenu>								
 
 			</p:menubar>
+			</h:form>
 		</div>
 
 		<div class="content" style="padding-top: 50px" id="content">
