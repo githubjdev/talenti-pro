@@ -18,7 +18,7 @@ public class CargoRepository extends GenericRepositoryImpl<Cargo> {
 	
 
 	public List<Cargo> listar() {
-		return em.createQuery("select f FROM "+getTableName()+" f", Cargo.class).getResultList();
+		return em.createQuery("select f FROM "+getEntityName()+" f", Cargo.class).getResultList();
 	}
 
 	public List<Cargo> buscar(String nome) {
