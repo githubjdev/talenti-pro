@@ -11,13 +11,22 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(name = "aut_usuario_acesso")
+@Table(
+	    name = "aut_usuario_acesso",
+	    uniqueConstraints = {
+	        @UniqueConstraint(
+	            name = "uk_aut_usuario_acesso_acesso_usuario",
+	            columnNames = { "acesso_id", "usuario_id" }
+	        )
+	    }
+	)
 @SequenceGenerator(name = "seq_usuario_acesso", sequenceName = "seq_usuario_acesso", allocationSize = 1, initialValue = 1)
 public class UsuarioAcesso implements Serializable {
 

@@ -7,9 +7,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "ver_versionador_banco")
+@Table(
+	    name = "ver_versionador_banco",
+	    uniqueConstraints = {
+	        @UniqueConstraint(
+	            name = "uk_ver_versionador_arquivosql",
+	            columnNames = { "arquivosql" }
+	        )
+	    }
+	)
 @SequenceGenerator(name = "seq_versionador_banco", sequenceName = "seq_versionador_banco", allocationSize = 1, initialValue = 1)
 public class VersionadorBanco extends BaseEntity {
 
@@ -20,7 +29,7 @@ public class VersionadorBanco extends BaseEntity {
 	private Long id;
 
 	
-	@Column(nullable = false, name = "arquivosql")
+	@Column(nullable = false, name = "arquivosql", unique = true)
 	private String arquivoSql;
 
 	public void setArquivoSql(String arquivoSql) {

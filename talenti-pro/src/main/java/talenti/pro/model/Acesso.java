@@ -9,13 +9,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(name = "aut_acesso")
+@Table(
+	    name = "aut_acesso",
+	    uniqueConstraints = {
+	        @UniqueConstraint(
+	            name = "uk_aut_acesso_acesso",
+	            columnNames = { "acesso" }
+	        )
+	    }
+	)
 @SequenceGenerator(name = "seq_acesso", sequenceName = "seq_acesso", allocationSize = 1, initialValue = 1)
 public class Acesso implements Serializable {
 
@@ -25,7 +34,7 @@ public class Acesso implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_acesso")
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String acesso;
 
 }

@@ -13,8 +13,8 @@
 	    <realm-name>TalentiRealm</realm-name>
 	
 	    <form-login-config>
-	        <form-login-page>/login.xhtml</form-login-page>
-	        <form-error-page>/login.xhtml?erro=true</form-error-page>
+	        <form-login-page>/publico/login.xhtml</form-login-page>
+	        <form-error-page>/publico/login.xhtml?erro=true</form-error-page>
 	    </form-login-config>
 	</login-config>
 	
@@ -23,8 +23,8 @@
 	<security-constraint>
 	    <web-resource-collection>
 	        <web-resource-name>Páginas Públicas</web-resource-name>
-	        <url-pattern>/login.xhtml</url-pattern>
-	        <url-pattern>/public/*</url-pattern>
+	        <url-pattern>/publico/login.xhtml</url-pattern>
+	        <url-pattern>/publico/*</url-pattern>
 	        <url-pattern>/templates/*</url-pattern>
 	        <url-pattern>/resources/*</url-pattern>
 	        <url-pattern>/javax.faces.resource/*</url-pattern>
@@ -53,7 +53,7 @@
 	</security-role>	
 
 	<welcome-file-list>
-		<welcome-file>pages/index.xhtml</welcome-file>
+		<welcome-file>publico/login.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<context-param>

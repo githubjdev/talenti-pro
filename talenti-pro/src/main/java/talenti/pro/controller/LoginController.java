@@ -26,7 +26,7 @@ public class LoginController extends ManagedBeanController {
 	public void logout() throws Exception {
 		getRequest().logout();
 		getFacesContext().getExternalContext().invalidateSession();
-		getFacesContext().getExternalContext().redirect("/index.xhtml");
+		getFacesContext().getExternalContext().redirect("/publico/login.xhtml");
 	}
 
 	@Override
