@@ -1,7 +1,9 @@
 package talenti.pro.controller;
 
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Named(value = "loginController")
 @ViewScoped
@@ -12,16 +14,22 @@ public class LoginController extends ManagedBeanController {
 	private String login;
 	private String senha;
 
-	public String doLogin() {
+	  public String doLogin() {
+	        try {
+	            HttpServletRequest req = 
+	                (HttpServletRequest) FacesContext.getCurrentInstance()
+	                  .getExternalContext().getRequest();
 
-		try {
-			getRequest().login(login, senha);
-			return "/pages/index.xhtml?faces-redirect=true";
-		} catch (Exception e) {
-			erro("Usuário ou senha inválido.");
-			return null;
-		}
-	}
+	            req.login(login, senha);
+
+	            return "/pages/index.xhtml?faces-redirect=true";
+
+	        } catch (Exception e) {
+	        	  e.printStackTrace();
+	           erro("Login inválido");
+	            return null;
+	        }
+	    }
 
 	public void logout() throws Exception {
 		getRequest().logout();

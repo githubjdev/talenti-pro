@@ -5,20 +5,7 @@
 	version="6.0">
 
 	<display-name>Talenti PRO</display-name>
-	
-	
-	<!-- ***** LOGIN CUSTOMIZADO ***** -->
-	<login-config>
-	    <auth-method>FORM</auth-method>
-	    <realm-name>TalentiRealm</realm-name>
-	
-	    <form-login-config>
-	        <form-login-page>/publico/login.xhtml</form-login-page>
-	        <form-error-page>/publico/login.xhtml?erro=true</form-error-page>
-	    </form-login-config>
-	</login-config>
-	
-	
+
 		<!-- ***** PÁGINAS PÚBLICAS ***** -->
 	<security-constraint>
 	    <web-resource-collection>
