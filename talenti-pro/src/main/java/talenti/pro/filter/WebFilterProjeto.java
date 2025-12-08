@@ -56,7 +56,6 @@ public class WebFilterProjeto implements Filter {
 		}
 
 		if (url.startsWith("/publico/")) {
-			// se estiver logado e tentar ir no login
 			if (logado && url.startsWith("/publico/login")) {
 				resp.sendRedirect(ctx + "/pages/index.xhtml");
 				return;
