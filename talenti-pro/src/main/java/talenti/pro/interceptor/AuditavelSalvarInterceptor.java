@@ -7,6 +7,7 @@ import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 import talenti.pro.anotations.AuditavelSalvar;
+import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.filter.UserContext;
 import talenti.pro.model.BaseEntity;
 import talenti.pro.model.Usuario;
@@ -27,6 +28,10 @@ public class AuditavelSalvarInterceptor {
 		if (params.length > 0 && params[0] instanceof BaseEntity entity) {
 
 			Usuario user = service.getUserByLogin(UserContext.getUsuario());
+			
+			if(user == null) {
+				throw new ValidacaoException("Usuário logado não pode ser null dentro do AuditavelSalvarInterceptor.");
+			}
 
 			if (entity.getDataCriacao() == null) {
 				entity.setDataCriacao(LocalDateTime.now());
