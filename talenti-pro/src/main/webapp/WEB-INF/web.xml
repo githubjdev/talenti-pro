@@ -6,7 +6,14 @@
 
 	<display-name>Talenti PRO</display-name>
 
-		<!-- ***** PÁGINAS PÚBLICAS ***** -->
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/publico/login.xhtml</form-login-page>
+			<form-error-page>/publico/login.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+
 	<security-constraint>
 	    <web-resource-collection>
 	        <web-resource-name>Páginas Públicas</web-resource-name>
@@ -16,7 +23,6 @@
 	        <url-pattern>/resources/*</url-pattern>
 	        <url-pattern>/javax.faces.resource/*</url-pattern>
 	    </web-resource-collection>
-	    <!-- Sem <auth-constraint>, esta área é pública -->
 	</security-constraint>
 	
 	
@@ -31,7 +37,6 @@
 	    </auth-constraint>
 	</security-constraint>
 
-	<!-- ***** DECLARAÇÃO DE ROLES ***** -->
 	<security-role>
 	    <role-name>ROLE_ADMIN</role-name>
 	</security-role>
