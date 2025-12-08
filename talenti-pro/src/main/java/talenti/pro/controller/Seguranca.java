@@ -31,9 +31,13 @@ public class Seguranca implements Serializable {
 	public boolean colaborador() {
 		return request.isUserInRole("ROLE_COLABORADOR");
 	}
-	
+
 	public boolean user() {
 		return request.isUserInRole("ROLE_USER");
+	}
+
+	public boolean master() {
+		return request.isUserInRole("ROLE_MASTER");
 	}
 
 	public boolean tem(String role) {

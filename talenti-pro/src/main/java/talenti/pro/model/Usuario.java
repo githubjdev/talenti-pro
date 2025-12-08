@@ -16,15 +16,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(
-	    name = "aut_usuario",
-	    uniqueConstraints = {
-	        @UniqueConstraint(
-	            name = "uk_aut_usuario_login",
-	            columnNames = { "login" }
-	        )
-	    }
-	)
+@Table(name = "aut_usuario", uniqueConstraints = {
+		@UniqueConstraint(name = "uk_aut_usuario_login", columnNames = { "login" }) })
 @SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario", allocationSize = 1, initialValue = 1)
 public class Usuario extends BaseEntity {
 
@@ -42,11 +35,10 @@ public class Usuario extends BaseEntity {
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<UsuarioAcesso> acessos = new ArrayList<UsuarioAcesso>();
-	
-	
+
 	public Usuario() {
 	}
-	
+
 	public Usuario(Long id) {
 		this.id = id;
 	}
@@ -90,6 +82,5 @@ public class Usuario extends BaseEntity {
 	public void setAcessos(List<UsuarioAcesso> acessos) {
 		this.acessos = acessos;
 	}
-	
 
 }

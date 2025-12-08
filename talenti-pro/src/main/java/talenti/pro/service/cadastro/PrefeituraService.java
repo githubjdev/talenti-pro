@@ -12,7 +12,7 @@ import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.cadastro.Prefeitura;
 import talenti.pro.repository.cadastro.PrefeituraRepository;
 
-@RolesAllowed("ROLE_USER")
+@RolesAllowed({"ROLE_MASTER"})
 @RequestScoped
 public class PrefeituraService implements ServiceInterface<Prefeitura> {
 

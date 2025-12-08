@@ -23,6 +23,17 @@ public class Prefeitura extends BaseEntity {
 	@Column(nullable = false)
 	private String nome;
 
+	@Column(nullable = true)
+	private String schema_db_name;
+
+	public void setSchema_db_name(String schema_db_name) {
+		this.schema_db_name = schema_db_name;
+	}
+
+	public String getSchema_db_name() {
+		return schema_db_name;
+	}
+
 	public Long getId() {
 		return id;
 	}

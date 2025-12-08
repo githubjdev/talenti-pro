@@ -9,7 +9,7 @@ import jakarta.persistence.Query;
 import talenti.pro.model.cadastro.Prefeitura;
 import talenti.pro.repository.GenericRepositoryImpl;
 
-@RolesAllowed("ROLE_USER")
+@RolesAllowed({"ROLE_MASTER"})
 @Dependent
 public class PrefeituraRepository extends GenericRepositoryImpl<Prefeitura> {
 

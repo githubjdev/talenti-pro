@@ -1,0 +1,119 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-sistema.xhtml">
+
+
+<ui:define name="content">
+
+<div style="display:flex; justify-content:center; margin-bottom:15px;">
+    <p:staticMessage 
+        detail="#{prefeituraController.descricaoTela}" 
+        severity="info" 
+        closable="true"
+        style="width: 80%; text-align:center; font-size:16px; padding:12px;background: #c8e6c9; border: none; color:#304562" />
+</div>
+
+<h:form id="formBuscaPrefeitura" rendered="#{seguranca.user()}">
+
+	    <p:panel header="Buscar Prefeitura" style="max-width:80%;margin:auto;"
+		     toggleable="true"
+	         collapsed="true"
+	         toggleSpeed="300">
+	        <h:panelGrid columns="2" style="width:100%" cellpadding="5">
+	
+	            <p:outputLabel for="nomeBusca" value="Nome:" />
+	            <p:inputText id="nomeBusca" value="#{prefeituraController.filtroNome}"
+	                         placeholder="Digite o nome do prefeitura" style="width:100%" />
+	        </h:panelGrid>
+	
+	        <p:commandButton value="Pesquisar" icon="pi pi-search"
+	                         action="#{prefeituraController.pesquisar}"
+	                         process="@form"
+	                         update="formPrefeitura:tabela msgs"
+	                         style="margin-top:10px;width:100%;" />
+	    </p:panel>
+	
+	</h:form>
+
+	<p:separator style="margin:40px 0;"  />
+
+	       <h:form id="formPrefeitura">
+				<p:panel header="Cadastro de Prefeitura"
+					style="max-width:80%;margin:auto;">
+
+				<h:inputHidden id="id" value="#{prefeituraController.prefeitura.id}" />
+ 				<h:panelGrid columns="2" style="width:100%" cellpadding="5">
+					
+					 <p:outputLabel  value="ID:" />
+					<p:inputText value="#{prefeituraController.prefeitura.id}" style="width:100%"
+						readonly="true" />
+						
+					<p:outputLabel value="Nome:" />	
+					<p:inputText value="#{prefeituraController.prefeitura.nome}"
+						placeholder="Nome" style="width:100%" label="Nome do prefeitura"
+						required="true" />
+						
+
+				</h:panelGrid>	
+				<h:panelGroup layout="block" style="display:flex; gap:10px; margin-top:10px;">
+				    <p:commandButton value="Salvar" 
+				                     action="#{prefeituraController.salvar}"
+				                     update="formPrefeitura tabela msgs"
+				                     icon="pi pi-save"
+				                     style="flex:1;" />
+				
+				    <p:commandButton value="Novo" 
+				                     action="#{prefeituraController.novo}"
+				                     update="formPrefeitura tabela msgs"
+				                     icon="pi pi-plus"
+				                     style="flex:1;" />
+				</h:panelGroup>
+					
+				</p:panel>
+
+				<p:separator style="margin:20px 0" />
+				
+
+				<p:dataTable id="tabela" value="#{prefeituraController.prefeituras}" 
+				    var="p"
+				    paginator="true"
+				    lazy="true"
+				    rows="5"
+				    rowsPerPageTemplate="5,10,20,50"
+				    paginatorAlwaysVisible="true"
+				    paginatorPosition="top"
+					style="max-width:80%;margin:auto;">
+					<p:column headerText="ID">#{p.id}</p:column>
+					<p:column headerText="Nome">#{p.nome}</p:column>
+					<p:column headerText="Ações">
+					<p:commandButton icon="pi pi-pencil"
+					    action="#{prefeituraController.editar(p)}"
+					    update=":formPrefeitura"
+					    process="@this"
+					    immediate="true"
+					    styleClass="ui-button-warning"
+					    title="Editar"/>
+					
+					<p:commandButton icon="pi pi-trash"
+					    action="#{prefeituraController.excluir(p)}"
+					    update="tabela :formPrefeitura msgs"
+					    process="@this"
+					    immediate="true"
+					    styleClass="ui-button-danger"
+					    title="Excluir">
+					    
+					        <p:confirm header="Confirmar" 
+				               message="Tem certeza que deseja excluir o registro?"
+				               icon="pi pi-exclamation-triangle" />
+					 </p:commandButton>
+
+					</p:column>
+				</p:dataTable>
+				
+			</h:form>
+			<p:separator style="margin:50px 0" />	
+	</ui:define>
+</ui:composition>
