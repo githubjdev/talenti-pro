@@ -1,2 +1,8 @@
 /build/
 /target/
+/.classpath
+/.project
+/.settings/
+/.vscode/
+/idea/
+/bin/

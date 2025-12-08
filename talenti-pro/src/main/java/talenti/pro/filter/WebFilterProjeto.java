@@ -16,6 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebFilter("/*")
 public class WebFilterProjeto implements Filter {
 	
+	private static final String PUBLICO_LOGIN_XHTML = "/publico/login.xhtml";
+	private static final String PAGES_INDEX_XHTML = "/pages/index.xhtml";
 	private final Pattern acessoParcialPages = Pattern.compile("^/(pa|pag|page|pages[^/].*)$");
 	private final Pattern diretorioSemPagina = Pattern.compile("^/pages/.+/$");
 
@@ -36,28 +38,28 @@ public class WebFilterProjeto implements Filter {
 		}
 
 		if (url.equals("/") || url.isEmpty()) {
-			resp.sendRedirect(ctx + (logado ? "/pages/index.xhtml" : "/publico/login.xhtml"));
+			resp.sendRedirect(ctx + (logado ? PAGES_INDEX_XHTML : PUBLICO_LOGIN_XHTML));
 			return;
 		}
 
 		if (acessoParcialPages.matcher(url).matches()) {
-			resp.sendRedirect(ctx + (logado ? "/pages/index.xhtml" : "/publico/login.xhtml"));
+			resp.sendRedirect(ctx + (logado ? PAGES_INDEX_XHTML : PUBLICO_LOGIN_XHTML));
 			return;
 		}
 
 		if (url.equals("/pages") || url.equals("/pages/")) {
-			resp.sendRedirect(ctx + (logado ? "/pages/index.xhtml" : "/publico/login.xhtml"));
+			resp.sendRedirect(ctx + (logado ? PAGES_INDEX_XHTML : PUBLICO_LOGIN_XHTML));
 			return;
 		}
 
 		if (diretorioSemPagina.matcher(url).matches()) {
-			resp.sendRedirect(ctx + (logado ? "/pages/index.xhtml" : "/publico/login.xhtml"));
+			resp.sendRedirect(ctx + (logado ? PAGES_INDEX_XHTML : PUBLICO_LOGIN_XHTML));
 			return;
 		}
 
 		if (url.startsWith("/publico/")) {
 			if (logado && url.startsWith("/publico/login")) {
-				resp.sendRedirect(ctx + "/pages/index.xhtml");
+				resp.sendRedirect(ctx + PAGES_INDEX_XHTML);
 				return;
 			}
 			chain.doFilter(request, response);
@@ -65,7 +67,7 @@ public class WebFilterProjeto implements Filter {
 		}
 
 		if (url.startsWith("/pages/") && !logado) {
-			resp.sendRedirect(ctx + "/publico/login.xhtml");
+			resp.sendRedirect(ctx + PUBLICO_LOGIN_XHTML);
 			return;
 		}
 
