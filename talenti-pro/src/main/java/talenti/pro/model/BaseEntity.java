@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Version;
 
 @MappedSuperclass
@@ -23,11 +25,13 @@ public abstract class BaseEntity implements Serializable {
 	@Column(name = "data_atualizacao")
 	private LocalDateTime dataAtualizacao;
 
-	@Column(name = "criado_por")
-	private String criadoPor;
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "criado_por", nullable = false, foreignKey = @ForeignKey(name = "criado_por_fk"))
+	private Usuario criadoPor;
 
-	@Column(name = "atualizado_por")
-	private String atualizadoPor;
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "atualizado_por", nullable = false, foreignKey = @ForeignKey(name = "atualizado_por_fk"))
+	private Usuario atualizadoPor;
 
 	@Version
 	private Long versao;
@@ -56,19 +60,11 @@ public abstract class BaseEntity implements Serializable {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
-	public String getCriadoPor() {
-		return criadoPor;
-	}
-
-	public void setCriadoPor(String criadoPor) {
-		this.criadoPor = criadoPor;
-	}
-
-	public String getAtualizadoPor() {
+	public Usuario getAtualizadoPor() {
 		return atualizadoPor;
 	}
 
-	public void setAtualizadoPor(String atualizadoPor) {
+	public void setAtualizadoPor(Usuario atualizadoPor) {
 		this.atualizadoPor = atualizadoPor;
 	}
 
@@ -80,17 +76,13 @@ public abstract class BaseEntity implements Serializable {
 		this.versao = versao;
 	}
 
-	@PrePersist
-	public void prePersist() {
-		this.dataCriacao = LocalDateTime.now();
-		this.dataAtualizacao = LocalDateTime.now();
-		if (this.ativo == null)
-			this.ativo = true;
+	public Usuario getCriadoPor() {
+		return criadoPor;
 	}
 
-	@PreUpdate
-	public void preUpdate() {
-		this.dataAtualizacao = LocalDateTime.now();
+	public void setCriadoPor(Usuario criadoPor) {
+		this.criadoPor = criadoPor;
 	}
+
 
 }

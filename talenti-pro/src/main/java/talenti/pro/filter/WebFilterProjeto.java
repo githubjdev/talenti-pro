@@ -20,7 +20,7 @@ public class WebFilterProjeto implements Filter {
 	private static final String PAGES_INDEX_XHTML = "/pages/index.xhtml";
 	private final Pattern acessoParcialPages = Pattern.compile("^/(pa|pag|page|pages[^/].*)$");
 	private final Pattern diretorioSemPagina = Pattern.compile("^/pages/.+/$");
-
+	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -71,7 +71,14 @@ public class WebFilterProjeto implements Filter {
 			return;
 		}
 
-		chain.doFilter(request, response);
+		try {
+			if (logado) {
+				UserContext.setUsuario(req.getUserPrincipal().getName());
+			}
+			chain.doFilter(request, response);
+		} finally {
+			UserContext.clear(); // evita memory leak
+		}
 	}
 
 	@Override

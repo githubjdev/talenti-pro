@@ -1,7 +1,5 @@
 package talenti.pro.model.cadastro;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,15 +7,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import talenti.pro.model.BaseEntity;
 
-@Data
-@EqualsAndHashCode
 @Entity
 @Table(name = "cad_gestor")
 @SequenceGenerator(name = "seq_gestor", sequenceName = "seq_gestor", allocationSize = 1, initialValue = 1)
-public class Gestor implements Serializable {
+public class Gestor extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 

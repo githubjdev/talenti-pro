@@ -11,6 +11,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceUnitUtil;
 import jakarta.persistence.Query;
 import jakarta.persistence.Table;
+import talenti.pro.anotations.AuditavelSalvar;
 
 public abstract class GenericRepositoryImpl<T extends Serializable> implements GenericRepository<T> {
 
@@ -23,6 +24,7 @@ public abstract class GenericRepositoryImpl<T extends Serializable> implements G
         this.clazz = clazz;
     }
 
+    @AuditavelSalvar
 	@Override
 	public T salvar(T entidade) {
 		if (getEntityId(entidade) != null) {

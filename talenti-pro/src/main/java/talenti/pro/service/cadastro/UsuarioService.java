@@ -61,5 +61,14 @@ public class UsuarioService implements ServiceInterface<Usuario> {
 	public Usuario buscarPorId(Long id) {
 		return repository.buscarPorId(id);
 	}
+	
+	
+	public Long getIdByLogin(String login) {
+		return repository.getIdByLogin(login);
+	}
+	
+	public Usuario getUserByLogin(String login) {
+		return repository.getUserByLogin(login);
+	}
 
 }

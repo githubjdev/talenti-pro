@@ -10,14 +10,14 @@ import jakarta.persistence.Table;
 import talenti.pro.model.BaseEntity;
 
 @Entity
-@Table(name = "cad_cargo")
-@SequenceGenerator(name = "seq_cargo", sequenceName = "seq_cargo", allocationSize = 1, initialValue = 1)
-public class Cargo extends BaseEntity{
+@Table(name = "cad_prefeitura")
+@SequenceGenerator(name = "seq_prefeitura", sequenceName = "seq_prefeitura", allocationSize = 1, initialValue = 1)
+public class Prefeitura extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cargo")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_prefeitura")
 	private Long id;
 
 	@Column(nullable = false)

@@ -1,6 +1,5 @@
 package talenti.pro.model.cadastro;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -14,15 +13,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import talenti.pro.model.BaseEntity;
 
-@Data
-@EqualsAndHashCode
 @Entity
 @Table(name = "cad_colaborador")
 @SequenceGenerator(name = "seq_colaborador", sequenceName = "seq_colaborador", allocationSize = 1, initialValue = 1)
-public class Colaborador implements Serializable {
+public class Colaborador extends BaseEntity{
 
 	private static final long serialVersionUID = 1L;
 

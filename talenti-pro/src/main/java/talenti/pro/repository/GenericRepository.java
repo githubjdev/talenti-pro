@@ -10,7 +10,7 @@ public interface GenericRepository<T extends Serializable> {
 	List<T> listarPaginado(int first, int pageSize, Map<String, Object> filters);
 
 	Long contar(Map<String, Object> filters);
-
+	
 	T salvar(T entidade);
 
 	void excluir(Long id);

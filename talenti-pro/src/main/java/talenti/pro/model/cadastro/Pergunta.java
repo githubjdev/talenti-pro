@@ -1,7 +1,5 @@
 package talenti.pro.model.cadastro;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,15 +11,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import talenti.pro.model.BaseEntity;
 
-@Data
-@EqualsAndHashCode
 @Entity
 @Table(name = "cad_pergunta")
 @SequenceGenerator(name = "seq_pergunta", sequenceName = "seq_pergunta", allocationSize = 1, initialValue = 1)
-public class Pergunta implements Serializable {
+public class Pergunta extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 

@@ -12,11 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@Data
-@EqualsAndHashCode
 @Entity
 @Table(
 	    name = "aut_usuario_acesso",
@@ -46,6 +42,33 @@ public class UsuarioAcesso implements Serializable {
 
 	public UsuarioAcesso(Usuario usuario, Acesso acesso) {
 		this.usuario = usuario;
+		this.acesso = acesso;
+	}
+	
+	public UsuarioAcesso() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Acesso getAcesso() {
+		return acesso;
+	}
+
+	public void setAcesso(Acesso acesso) {
 		this.acesso = acesso;
 	}
 

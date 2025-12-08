@@ -2,77 +2,35 @@ package talenti.pro.repository.cadastro;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.Dependent;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
-import talenti.pro.model.Usuario;
+import talenti.pro.model.cadastro.Prefeitura;
 import talenti.pro.repository.GenericRepositoryImpl;
 
 @RolesAllowed("ROLE_USER")
 @Dependent
-public class UsuarioRepository extends GenericRepositoryImpl<Usuario> {
+public class PrefeituraRepository extends GenericRepositoryImpl<Prefeitura> {
 
-	public UsuarioRepository() {
-		super(Usuario.class);
+	public PrefeituraRepository() {
+		super(Prefeitura.class);
 	}
 	
 	
-	
-	public Usuario getUserByLogin(String login) {
 
-		try {
-	        Query query = em.createQuery(
-	        				  "select u from " + getEntityName() + " u where u.login = :login");
-	        query.setParameter("login", login);
-	        query.setMaxResults(1);
-	        return (Usuario) query.getSingleResult();
-	    } catch (NoResultException e) {
-	        return null;
-	    }
-	}
-	
-	public Long getIdByLogin(String login) {
-
-		try {
-	        Query query = em.createNativeQuery(
-	        				  "select id from " + getTableName() + " where login = :login limit 1");
-	        query.setParameter("login", login);
-	        Object result = query.getSingleResult();
-	        return ((Number) result).longValue();
-	    } catch (NoResultException e) {
-	        return null;
-	    }
-	}
-	
-	public Optional<Long> getIdByLoginOp(String login) {
-	    try {
-	        TypedQuery<Long> query = em.createQuery(
-	            "select u.id from " + getEntityName() + " u where u.login = :login", Long.class
-	        );
-	        query.setParameter("login", login);
-	        return Optional.of(query.getSingleResult());
-	    } catch (NoResultException e) {
-	        return Optional.empty();
-	    }
+	public List<Prefeitura> listar() {
+		return em.createQuery("select f FROM "+getEntityName()+" f", Prefeitura.class).getResultList();
 	}
 
-
-	public List<Usuario> listar() {
-		return em.createQuery("select f FROM "+getTableName()+" f", Usuario.class).getResultList();
-	}
-
-	public List<Usuario> buscar(String nome) {
+	public List<Prefeitura> buscar(String nome) {
 		String jpql = "SELECT p FROM "+getEntityName()+" p WHERE 1=1";
 
 		if (nome != null && !nome.trim().isEmpty()) {
 			jpql += " AND LOWER(p.nome) LIKE LOWER(:nome)";
 		}
 
-		var query = em.createQuery(jpql, Usuario.class);
+		var query = em.createQuery(jpql, Prefeitura.class);
 		if (nome != null && !nome.trim().isEmpty()) {
 			query.setParameter("nome", "%" + nome + "%");
 		}
@@ -81,7 +39,7 @@ public class UsuarioRepository extends GenericRepositoryImpl<Usuario> {
 	}
 
 	@Override
-	public List<Usuario> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
+	public List<Prefeitura> listarPaginado(int first, int pageSize, Map<String, Object> filters) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM "+getTableName()+" WHERE 1=1");
 
 		if (filters != null) {
@@ -96,7 +54,7 @@ public class UsuarioRepository extends GenericRepositoryImpl<Usuario> {
 
 		sql.append(" LIMIT :limit OFFSET :offset");
 
-		Query query = em.createNativeQuery(sql.toString(), Usuario.class);
+		Query query = em.createNativeQuery(sql.toString(), Prefeitura.class);
 
 		if (filters != null) {
 			if (filters.containsKey("nome") && filters.get("nome") != null

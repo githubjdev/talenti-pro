@@ -1,6 +1,5 @@
 package talenti.pro.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@Data
-@EqualsAndHashCode
 @Entity
 @Table(
 	    name = "aut_usuario",
@@ -31,7 +26,7 @@ import lombok.EqualsAndHashCode;
 	    }
 	)
 @SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario", allocationSize = 1, initialValue = 1)
-public class Usuario implements Serializable {
+public class Usuario extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
@@ -47,6 +42,14 @@ public class Usuario implements Serializable {
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<UsuarioAcesso> acessos = new ArrayList<UsuarioAcesso>();
+	
+	
+	public Usuario() {
+	}
+	
+	public Usuario(Long id) {
+		this.id = id;
+	}
 
 	public void addAcesso(Acesso acesso) {
 		acessos.add(new UsuarioAcesso(this, acesso));
@@ -55,5 +58,38 @@ public class Usuario implements Serializable {
 	public void removeAcesso(Acesso acesso) {
 		acessos.removeIf(a -> a.getAcesso().equals(acesso));
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public List<UsuarioAcesso> getAcessos() {
+		return acessos;
+	}
+
+	public void setAcessos(List<UsuarioAcesso> acessos) {
+		this.acessos = acessos;
+	}
+	
 
 }

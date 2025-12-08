@@ -1,6 +1,5 @@
 package talenti.pro.model.avaliacao;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -14,19 +13,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import talenti.pro.model.BaseEntity;
 import talenti.pro.model.cadastro.Cargo;
 import talenti.pro.model.cadastro.Competencia;
 import talenti.pro.model.cadastro.Departamento;
 import talenti.pro.model.cadastro.VinculoEmpregativo;
 
-@Data
-@EqualsAndHashCode
 @Entity
 @Table(name = "aval_avaliacao")
 @SequenceGenerator(name = "seq_avaliacao", sequenceName = "seq_avaliacao", allocationSize = 1, initialValue = 1)
-public class Avaliacao implements Serializable {
+public class Avaliacao extends BaseEntity{
 
 	private static final long serialVersionUID = 1L;
 
@@ -123,5 +119,8 @@ public class Avaliacao implements Serializable {
 	public void setVinculoEmpregativo(VinculoEmpregativo vinculoEmpregativo) {
 		this.vinculoEmpregativo = vinculoEmpregativo;
 	}
+	
+	
+	
 
 }

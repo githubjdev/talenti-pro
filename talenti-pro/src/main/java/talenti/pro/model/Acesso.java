@@ -10,21 +10,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@Data
-@EqualsAndHashCode
 @Entity
-@Table(
-	    name = "aut_acesso",
-	    uniqueConstraints = {
-	        @UniqueConstraint(
-	            name = "uk_aut_acesso_acesso",
-	            columnNames = { "acesso" }
-	        )
-	    }
-	)
+@Table(name = "aut_acesso", uniqueConstraints = {
+		@UniqueConstraint(name = "uk_aut_acesso_acesso", columnNames = { "acesso" }) })
 @SequenceGenerator(name = "seq_acesso", sequenceName = "seq_acesso", allocationSize = 1, initialValue = 1)
 public class Acesso implements Serializable {
 
@@ -36,5 +25,21 @@ public class Acesso implements Serializable {
 
 	@Column(nullable = false, unique = true)
 	private String acesso;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getAcesso() {
+		return acesso;
+	}
+
+	public void setAcesso(String acesso) {
+		this.acesso = acesso;
+	}
 
 }
