@@ -10,6 +10,7 @@ import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.LazyDataModel;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -28,6 +29,7 @@ import talenti.pro.service.cadastro.CompetenciaService;
 import talenti.pro.service.cadastro.DepartamentoService;
 import talenti.pro.service.cadastro.VinculoEmpregativoService;
 
+@RolesAllowed("ROLE_USER")
 @Named(value = "avaliacaoController")
 @ViewScoped
 public class AvaliacaoController extends ManagedBeanController {

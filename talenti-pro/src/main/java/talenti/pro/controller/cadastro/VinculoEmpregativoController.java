@@ -6,6 +6,7 @@ import java.util.Map;
 import org.primefaces.model.LazyDataModel;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -14,6 +15,7 @@ import talenti.pro.model.cadastro.VinculoEmpregativo;
 import talenti.pro.repository.GenericLazyDataModel;
 import talenti.pro.service.cadastro.VinculoEmpregativoService;
 
+@RolesAllowed("ROLE_USER")
 @Named(value = "vinculoEmpregativoController")
 @ViewScoped
 public class VinculoEmpregativoController extends ManagedBeanController {

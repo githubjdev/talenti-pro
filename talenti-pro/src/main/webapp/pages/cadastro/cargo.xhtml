@@ -16,7 +16,7 @@
         style="width: 80%; text-align:center; font-size:16px; padding:12px;background: #c8e6c9; border: none; color:#304562" />
 </div>
 
-<h:form id="formBuscaCargo">
+<h:form id="formBuscaCargo" rendered="#{seguranca.user()}">
 
 	    <p:panel header="Buscar Cargo" style="max-width:80%;margin:auto;"
 		     toggleable="true"

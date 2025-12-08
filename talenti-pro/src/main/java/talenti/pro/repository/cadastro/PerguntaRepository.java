@@ -3,11 +3,13 @@ package talenti.pro.repository.cadastro;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.Dependent;
 import jakarta.persistence.Query;
 import talenti.pro.model.cadastro.Pergunta;
 import talenti.pro.repository.GenericRepositoryImpl;
 
+@RolesAllowed("ROLE_USER")
 @Dependent
 public class PerguntaRepository extends GenericRepositoryImpl<Pergunta> {
 

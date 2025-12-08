@@ -1,9 +1,11 @@
 package talenti.pro.controller;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.security.PermitAll;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 
+@PermitAll
 @Named(value = "indexBean")
 @ViewScoped
 public class IndexBean extends ManagedBeanController {

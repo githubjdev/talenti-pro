@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -12,6 +13,7 @@ import talenti.pro.model.avaliacao.Avaliacao;
 import talenti.pro.repository.avaliacao.AvaliacaoRepository;
 import talenti.pro.service.cadastro.ServiceInterface;
 
+@RolesAllowed("ROLE_USER")
 @RequestScoped
 public class AvaliacaoService implements ServiceInterface<Avaliacao> {
 

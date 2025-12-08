@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -15,6 +16,7 @@ import talenti.pro.repository.GenericLazyDataModel;
 import talenti.pro.service.cadastro.DepartamentoService;
 import talenti.pro.service.cadastro.GestorService;
 
+@RolesAllowed("ROLE_USER")
 @Named(value = "departamentoController")
 @ViewScoped
 public class DepartamentoController extends ManagedBeanController {

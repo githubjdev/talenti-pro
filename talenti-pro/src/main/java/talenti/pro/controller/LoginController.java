@@ -2,11 +2,13 @@ package talenti.pro.controller;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 
+@PermitAll
 @Named(value = "loginController")
 @ViewScoped
 public class LoginController extends ManagedBeanController {

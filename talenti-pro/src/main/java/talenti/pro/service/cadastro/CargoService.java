@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,7 @@ import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.cadastro.Cargo;
 import talenti.pro.repository.cadastro.CargoRepository;
 
+@RolesAllowed("ROLE_USER")
 @RequestScoped
 public class CargoService implements ServiceInterface<Cargo> {
 

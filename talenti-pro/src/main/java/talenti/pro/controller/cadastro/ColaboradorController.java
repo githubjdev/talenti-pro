@@ -8,6 +8,7 @@ import java.util.Map;
 import org.primefaces.model.LazyDataModel;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -22,6 +23,7 @@ import talenti.pro.service.cadastro.ColaboradorService;
 import talenti.pro.service.cadastro.DepartamentoService;
 import talenti.pro.service.cadastro.VinculoEmpregativoService;
 
+@RolesAllowed("ROLE_USER")
 @Named(value = "colaboradorController")
 @ViewScoped
 public class ColaboradorController extends ManagedBeanController {
