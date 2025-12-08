@@ -33,21 +33,16 @@ public class AuditavelSalvarInterceptor {
 			}
 
 			entity.setDataAtualizacao(LocalDateTime.now());
+			entity.setAtualizadoPor(user);
 
-			if (user != null) {
-
-				if (entity.getCriadoPor() == null) {
-					entity.setCriadoPor(user);
-				}
-
-				entity.setAtualizadoPor(user);
-
-				if (entity.getDataCriacao() == null) {
-					entity.setDataCriacao(LocalDateTime.now());
-				}
-
-				entity.setDataAtualizacao(LocalDateTime.now());
+			if (entity.getCriadoPor() == null) {
+				entity.setCriadoPor(user);
 			}
+
+			if (entity.getDataCriacao() == null) {
+				entity.setDataCriacao(LocalDateTime.now());
+			}
+
 		}
 
 		return ctx.proceed();
