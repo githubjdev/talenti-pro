@@ -7,17 +7,23 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import talenti.pro.model.cadastro.Prefeitura;
 
 @Entity
 @Table(name = "aut_usuario", uniqueConstraints = {
-		@UniqueConstraint(name = "uk_aut_usuario_login", columnNames = { "login" }) })
+		@UniqueConstraint(name = "uk_aut_usuario_login", 
+				columnNames = { "login" }) 
+		})
 @SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario", allocationSize = 1, initialValue = 1)
 public class Usuario extends BaseEntity {
 
@@ -33,10 +39,22 @@ public class Usuario extends BaseEntity {
 	@Column(nullable = false)
 	private String senha;
 
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "prefeitura_id", nullable = false, foreignKey = @ForeignKey(name = "prefeitura_fk"))
+	private Prefeitura prefeitura;
+
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<UsuarioAcesso> acessos = new ArrayList<UsuarioAcesso>();
 
 	public Usuario() {
+	}
+
+	public void setPrefeitura(Prefeitura prefeitura) {
+		this.prefeitura = prefeitura;
+	}
+
+	public Prefeitura getPrefeitura() {
+		return prefeitura;
 	}
 
 	public Usuario(Long id) {

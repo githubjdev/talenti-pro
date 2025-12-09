@@ -5,15 +5,22 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import jakarta.annotation.security.PermitAll;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
+import talenti.pro.service.LoginService;
 
+@SuppressWarnings("unused")
 @PermitAll
 @Named(value = "loginController")
 @ViewScoped
 public class LoginController extends ManagedBeanController {
 
 	private static final long serialVersionUID = 1L;
+
+	
+	@Inject
+	private LoginService loginService;
 
 	private String login;
 	private String senha;

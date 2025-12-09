@@ -3,6 +3,7 @@ package talenti.pro.filter;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -12,6 +13,8 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import talenti.pro.multitenancy.TenantContext;
+import talenti.pro.service.LoginService;
 
 @WebFilter("/*")
 public class WebFilterProjeto implements Filter {
@@ -20,6 +23,9 @@ public class WebFilterProjeto implements Filter {
 	private static final String PAGES_INDEX_XHTML = "/pages/index.xhtml";
 	private final Pattern acessoParcialPages = Pattern.compile("^/(pa|pag|page|pages[^/].*)$");
 	private final Pattern diretorioSemPagina = Pattern.compile("^/pages/.+/$");
+	
+	@Inject
+	private LoginService loginService;
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -73,7 +79,9 @@ public class WebFilterProjeto implements Filter {
 
 		try {
 			if (logado) {
-				UserContext.setUsuario(req.getUserPrincipal().getName());
+				String user = req.getUserPrincipal().getName();
+				UserContext.setUsuario(user);
+				TenantContext.setTenantId(loginService.getSchemaBdPrefeitura(user));
 			}
 			chain.doFilter(request, response);
 		} finally {

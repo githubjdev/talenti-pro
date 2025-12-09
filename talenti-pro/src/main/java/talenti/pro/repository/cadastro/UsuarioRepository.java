@@ -21,7 +21,6 @@ public class UsuarioRepository extends GenericRepositoryImpl<Usuario> {
 	}
 	
 	
-	
 	public Usuario getUserByLogin(String login) {
 
 		try {
@@ -41,6 +40,7 @@ public class UsuarioRepository extends GenericRepositoryImpl<Usuario> {
 	        Query query = em.createNativeQuery(
 	        				  "select id from " + getTableName() + " where login = :login limit 1");
 	        query.setParameter("login", login);
+	        query.setMaxResults(1);
 	        Object result = query.getSingleResult();
 	        return ((Number) result).longValue();
 	    } catch (NoResultException e) {
@@ -54,6 +54,7 @@ public class UsuarioRepository extends GenericRepositoryImpl<Usuario> {
 	            "select u.id from " + getEntityName() + " u where u.login = :login", Long.class
 	        );
 	        query.setParameter("login", login);
+	        query.setMaxResults(1);
 	        return Optional.of(query.getSingleResult());
 	    } catch (NoResultException e) {
 	        return Optional.empty();

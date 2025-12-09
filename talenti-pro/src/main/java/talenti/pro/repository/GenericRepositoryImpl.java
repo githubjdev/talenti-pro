@@ -1,6 +1,5 @@
 package talenti.pro.repository;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -12,8 +11,9 @@ import jakarta.persistence.PersistenceUnitUtil;
 import jakarta.persistence.Query;
 import jakarta.persistence.Table;
 import talenti.pro.anotations.AuditavelSalvar;
+import talenti.pro.model.BaseEntity;
 
-public abstract class GenericRepositoryImpl<T extends Serializable> implements GenericRepository<T> {
+public abstract class GenericRepositoryImpl<T extends BaseEntity> implements GenericRepository<T> {
 
     @PersistenceContext
     protected EntityManager em;
