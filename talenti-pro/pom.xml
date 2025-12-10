@@ -6,6 +6,7 @@
 	<artifactId>talenti-pro</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<description>Deploy - Sistema TalentPRO</description>
 
 
 	<properties>
@@ -13,6 +14,29 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.test.skip>true</maven.test.skip>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<encoding>UTF-8</encoding>
+
+		<!-- JVM ARGS -->
+		<jvm.xms>-Xms3024m</jvm.xms>
+		<jvm.xmx>-Xmx7064m</jvm.xmx>
+		<jvm.gc>-XX:+UseG1GC</jvm.gc>
+		<jvm.stringDedup>-XX:+UseStringDeduplication</jvm.stringDedup>
+		<jvm.parallelRef>-XX:+ParallelRefProcEnabled</jvm.parallelRef>
+		<jvm.experimental>-XX:+UnlockExperimentalVMOptions</jvm.experimental>
+		<jvm.compressedOops>-XX:+UseCompressedOops</jvm.compressedOops>
+		<jvm.gcPause>-XX:MaxGCPauseMillis=200</jvm.gcPause>
+		<jvm.heapDump>-XX:+HeapDumpOnOutOfMemoryError</jvm.heapDump>
+		<jvm.metspace>-XX:MaxMetaspaceSize=1024m</jvm.metspace>
+		<jvm.encoding>-Dfile.encoding=UTF-8</jvm.encoding>
+		<jvm.preTouch>-XX:+AlwaysPreTouch</jvm.preTouch>
+		<jvm.largePages>-XX:+UseLargePages</jvm.largePages>
+		<jvm.numa>-XX:+UseNUMA</jvm.numa>
+		<jvm.tiered>-XX:+TieredCompilation</jvm.tiered>
+		<jvm.printComp>-XX:+PrintCompilation</jvm.printComp>
+		<jvm.maxInLine>-XX:MaxInlineSize=100</jvm.maxInLine>
 	</properties>
 
 
@@ -42,43 +66,89 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.2.27</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.14.0</version>
-		</dependency>
-		
-		
-		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-core</artifactId>
-		    <version>5.3.20.Final</version>
-		    <scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 
-				
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.3.20.Final</version>
+			<scope>provided</scope>
+		</dependency>
+
+
 	</dependencies>
 
 
 	<build>
-		<finalName>talenti-pro</finalName>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version><!--$NO-MVN-MAN-VER$-->
+				<configuration>
+					<argLine>
+						${jvm.xms}
+						${jvm.xmx}
+						${jvm.gc}
+						${jvm.stringDedup}
+						${jvm.parallelRef}
+						${jvm.experimental}
+						${jvm.compressedOops}
+						${jvm.gcPause}
+						${jvm.heapDump}
+						${jvm.encoding}
+						${jvm.preTouch}
+						${jvm.metspace}
+						${jvm.largePages}
+						${jvm.numa}
+						${jvm.tiered}
+						${jvm.printComp}
+						${jvm.maxInLine}
+					</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>16</release>
+					<release>17</release>
+					<source>${maven.compiler.source}</source>  <!-- Define aversão do Java para compilação -->
+					<target>${maven.compiler.target}</target>  <!-- Define aversão do Java para o código compilado -->
+					<debug>false</debug>
+					<fork>true</fork>
+					<compilerArgs>
+						<arg>-Xlint:none</arg> <!-- Evita logs de warnings -->
+						<arg>-g:none</arg> <!-- Remove info de debug -->
+					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>3.2.3</version>
+				<version>3.4.0</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<packagingExcludes>
+						src/test/**,
+						build-windows.bat
+					</packagingExcludes>
+					<archive>
+						<compress>true</compress>
+						<index>true</index>
+					</archive>
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>talenti-pro</finalName>
 	</build>
 </project>
