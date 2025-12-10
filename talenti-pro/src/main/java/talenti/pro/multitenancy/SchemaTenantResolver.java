@@ -2,6 +2,9 @@ package talenti.pro.multitenancy;
 
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 
+import jakarta.enterprise.inject.Vetoed;
+
+@Vetoed
 public class SchemaTenantResolver implements CurrentTenantIdentifierResolver {
 
 	private static final String DEFAULT_TENANT = "public";

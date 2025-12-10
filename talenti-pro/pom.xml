@@ -76,14 +76,18 @@
 			<scope>compile</scope>
 		</dependency>
 
-
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.3.20.Final</version>
+			<version>6.1.5.Final</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-
 
 	</dependencies>
 
@@ -122,8 +126,10 @@
 				<version>3.8.1</version>
 				<configuration>
 					<release>17</release>
-					<source>${maven.compiler.source}</source>  <!-- Define aversão do Java para compilação -->
-					<target>${maven.compiler.target}</target>  <!-- Define aversão do Java para o código compilado -->
+					<source>${maven.compiler.source}</source>  <!-- Define aversão
+					do Java para compilação -->
+					<target>${maven.compiler.target}</target>  <!-- Define aversão
+					do Java para o código compilado -->
 					<debug>false</debug>
 					<fork>true</fork>
 					<compilerArgs>

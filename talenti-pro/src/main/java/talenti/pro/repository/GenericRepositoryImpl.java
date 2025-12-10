@@ -15,7 +15,7 @@ import talenti.pro.model.BaseEntity;
 
 public abstract class GenericRepositoryImpl<T extends BaseEntity> implements GenericRepository<T> {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "talenti-pro-pu")
     protected EntityManager em;
 
     private final Class<T> clazz;
