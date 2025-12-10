@@ -8,6 +8,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:jboss/datasources/talentiDS</jta-data-source>
          
+        
+        <!-- Carregar automaticamente todas as entidades -->
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        
         <properties>
          
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
@@ -27,10 +31,13 @@
 			<property name="hibernate.order_updates" value="true"/>
             <property name="hibernate.connection.provider_disables_autocommit" value="true"/>
             
-             <property name="hibernate.multiTenancy" value="SCHEMA"/>
-             <property name="hibernate.multi_tenant_connection_provider" value="talenti.pro.multitenancy.SchemaMultiTenantConnectionProvider"/>
-             <property name="hibernate.tenant_identifier_resolver" value="talenti.pro.multitenancy.SchemaTenantResolver"/>      
-		    
+            <property name="hibernate.multiTenancy" value="SCHEMA"/>
+            <property name="hibernate.multi_tenant_connection_provider" value="talenti.pro.multitenancy.SchemaMultiTenantConnectionProvider"/>
+            <property name="hibernate.tenant_identifier_resolver" value="talenti.pro.multitenancy.SchemaTenantResolver"/> 
+             
+			<property name="jakarta.persistence.transactionType" value="JTA"/>
+			<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
+                  
         </properties>
     </persistence-unit>
 </persistence>

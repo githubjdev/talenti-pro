@@ -81,12 +81,12 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>6.1.5.Final</version>
 			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.hibernate</groupId>
-					<artifactId>hibernate-core</artifactId>
-				</exclusion>
-			</exclusions>
+				<exclusions>
+					<exclusion>
+						<groupId>org.hibernate</groupId>
+						<artifactId>hibernate-core</artifactId>
+					</exclusion>
+				</exclusions>
 		</dependency>
 
 	</dependencies>
