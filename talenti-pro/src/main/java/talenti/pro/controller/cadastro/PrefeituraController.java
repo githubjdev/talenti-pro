@@ -62,6 +62,26 @@ public class PrefeituraController extends ManagedBeanController {
 
 		prefeituras.setFixedFilters(filtros);
 	}
+	
+	
+	
+	public void gerarSchemaBanco() {
+		
+		if (!prefeitura.getSchema_db_name().isEmpty()) {
+			
+			if (!prefeituraService.existeSchema(prefeitura.getSchema_db_name())) {
+				
+				prefeituraService.criarSchemaBd(prefeitura.getSchema_db_name());
+				infoSucesso();
+			}else {
+				erro("Schema do banco já existente com o nome: " + prefeitura.getSchema_db_name());
+			}
+			
+		}else {
+			erro("Informe o schema do banco de dados.");
+		}
+		
+	}
 
 	public Prefeitura getPrefeitura() {
 		return prefeitura;

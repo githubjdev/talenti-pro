@@ -86,6 +86,7 @@ public class ColaboradorController extends ManagedBeanController {
 
 		colaboradors.setFixedFilters(filtros);
 	}
+	
 
 	public Colaborador getColaborador() {
 		return colaborador;
