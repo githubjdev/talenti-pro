@@ -61,5 +61,16 @@ public class PrefeituraService implements ServiceInterface<Prefeitura> {
 	public Prefeitura buscarPorId(Long id) {
 		return repository.buscarPorId(id);
 	}
+	
+	
+	public boolean existeSchema(String schema) {
+		return repository.existeSchema(schema);
+	}
+	
+	
+	@Transactional
+	public void criarSchemaBd(String nomeSchema)  {
+		repository.criarSchemaBd(nomeSchema);
+	}
 
 }

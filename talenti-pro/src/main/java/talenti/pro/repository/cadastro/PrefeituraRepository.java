@@ -6,6 +6,7 @@ import java.util.Map;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.Dependent;
 import jakarta.persistence.Query;
+import talenti.pro.exceptionhandler.ValidacaoException;
 import talenti.pro.model.cadastro.Prefeitura;
 import talenti.pro.repository.GenericRepositoryImpl;
 
@@ -17,6 +18,29 @@ public class PrefeituraRepository extends GenericRepositoryImpl<Prefeitura> {
 		super(Prefeitura.class);
 	}
 	
+
+	public String shemaBanco(String nomeSchema) {
+		Query query = em.createNativeQuery("select schema_name from information_schema.schemata where schema_name = :nome");
+		query.setParameter("nome", nomeSchema);
+		query.setMaxResults(1);
+		return query.getResultStream().findFirst().orElse("").toString();
+	}
+	
+	public boolean existeSchema(String schema) {
+		return !this.shemaBanco(schema).isEmpty();
+	}
+	
+	public void criarSchemaBd(String nomeSchema) {
+		
+		nomeSchema = nomeSchema.toLowerCase().trim();
+		
+		if (!nomeSchema.matches("[a-z0-9_]+")) {
+			throw new ValidacaoException("Nome de schema inválido");
+		} else {
+			Query query = em.createNativeQuery("CREATE SCHEMA IF NOT EXISTS " + nomeSchema);
+			query.executeUpdate();
+		}
+	}
 	
 
 	public List<Prefeitura> listar() {

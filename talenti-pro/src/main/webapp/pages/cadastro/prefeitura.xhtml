@@ -56,6 +56,11 @@
 						placeholder="Nome" style="width:100%" label="Nome do prefeitura"
 						required="true" />
 						
+						<p:outputLabel value="Schema BD" />	
+					 <p:inputText value="#{prefeituraController.prefeitura.schema_db_name}"
+						placeholder="Schema da prefeitura" style="width:100%" label="Schema da prefeitura"
+						required="true" />					
+						
 
 				</h:panelGrid>	
 				<h:panelGroup layout="block" style="display:flex; gap:10px; margin-top:10px;">
@@ -70,6 +75,14 @@
 				                     update="formPrefeitura tabela msgs"
 				                     icon="pi pi-plus"
 				                     style="flex:1;" />
+				</h:panelGroup>
+				
+				<h:panelGroup  layout="block" style="display:flex; gap:10px; margin-top:10px;">
+				          				    <p:commandButton value="Gerar Schema BD" 
+							                     action="#{prefeituraController.gerarSchemaBanco()}"
+							                     update=" msgs"
+							                     icon="pi pi-save"
+							                     style="flex:1;" />
 				</h:panelGroup>
 					
 				</p:panel>
