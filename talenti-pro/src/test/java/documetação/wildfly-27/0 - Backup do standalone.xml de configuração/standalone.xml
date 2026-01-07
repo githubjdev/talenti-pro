@@ -136,7 +136,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/talentiDS" pool-name="talentiDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-                    <connection-url>jdbc:postgresql://localhost:5433/talenti-pro</connection-url>
+                    <connection-url>${DB_TALENTI_PRO_URL:jdbc:postgresql://localhost:5433/talenti-pro}</connection-url>
                     <driver>postgresql</driver>
                     <pool>
                         <min-pool-size>10</min-pool-size>
@@ -145,8 +145,8 @@
                         <flush-strategy>IdleConnections</flush-strategy>
                     </pool>
                     <security>
-                        <user-name>postgres</user-name>
-                        <password>admin</password>
+                        <user-name>${DB_TALENTI_PRO_USER:postgres}</user-name>
+                        <password>${DB_TALENTI_PRO_SENHA:admin}</password>
                     </security>
                     <validation>
                         <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
